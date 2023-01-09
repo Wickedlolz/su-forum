@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PostService } from 'src/app/core/services/post.service';
+import { ITheme } from 'src/app/core/interfaces/theme';
+import { ThemeService } from 'src/app/core/services/theme.service';
 
 @Component({
   selector: 'app-theme-list',
@@ -7,16 +8,9 @@ import { PostService } from 'src/app/core/services/post.service';
   styleUrls: ['./theme-list.component.css'],
 })
 export class ThemeListComponent implements OnInit {
-  posts!: [];
+  themes!: ITheme[];
 
-  constructor(private postService: PostService) {}
+  constructor(private themeService: ThemeService) {}
 
-  ngOnInit(): void {
-    this.postService.loadPosts$().subscribe({
-      next: (posts) => {
-        this.posts = posts;
-      },
-      error: (error) => console.log(error),
-    });
-  }
+  ngOnInit(): void {}
 }

@@ -3,10 +3,18 @@ import { CommonModule } from '@angular/common';
 import { AsideComponent } from './aside/aside.component';
 import { ThemeListComponent } from './theme-list/theme-list.component';
 import { ThemeItemComponent } from './theme-item/theme-item.component';
+import { ThemesPageComponent } from './themes-page/themes-page.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { ThemesRoutingModule } from './themes-routing.module';
 
 @NgModule({
-  declarations: [AsideComponent, ThemeListComponent, ThemeItemComponent],
-  imports: [CommonModule],
+  declarations: [
+    AsideComponent,
+    ThemeListComponent,
+    ThemeItemComponent,
+    ThemesPageComponent,
+  ],
+  imports: [CommonModule, ThemesRoutingModule, SharedModule],
   exports: [AsideComponent, ThemeListComponent],
 })
 export class ThemesModule {}
