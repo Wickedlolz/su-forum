@@ -8,11 +8,16 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: HomePageComponent,
+    redirectTo: 'home',
   },
   {
     path: 'home',
-    component: ThemesPageComponent,
+    component: HomePageComponent,
+  },
+  {
+    path: 'themes',
+    loadChildren: () =>
+      import('./features/themes/themes.module').then((m) => m.ThemesModule),
   },
   {
     path: '**',

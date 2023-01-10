@@ -6,6 +6,7 @@ import { ThemeItemComponent } from './theme-item/theme-item.component';
 import { ThemesPageComponent } from './themes-page/themes-page.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ThemesRoutingModule } from './themes-routing.module';
+import { ThemeDetailsPageComponent } from './theme-details-page/theme-details-page.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { ThemesRoutingModule } from './themes-routing.module';
     ThemeListComponent,
     ThemeItemComponent,
     ThemesPageComponent,
+    ThemeDetailsPageComponent,
   ],
   imports: [CommonModule, ThemesRoutingModule, SharedModule],
   exports: [AsideComponent, ThemeListComponent],
