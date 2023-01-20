@@ -13,3 +13,7 @@ export interface IUser {
   updatedAt: string;
   __v: number;
 }
+
+export interface IUserLoginDto {}
+
+export interface IUserRegisterDto {}
