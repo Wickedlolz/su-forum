@@ -1,4 +1,10 @@
 import { Component } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
 
@@ -8,7 +14,16 @@ import { UserService } from 'src/app/core/services/user.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  constructor(private userService: UserService, private router: Router) {}
+  loginFormGroup: FormGroup = this.formBuilder.group({
+    email: new FormControl('', [Validators.required]),
+    password: new FormControl(null, [Validators.required]),
+  });
+
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {}
 
   handleLogin(): void {
     this.userService.login();
