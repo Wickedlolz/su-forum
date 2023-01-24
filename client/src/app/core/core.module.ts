@@ -4,6 +4,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { PostService } from './services/post.service';
 import { RouterModule } from '@angular/router';
+import { ThemeService } from './services/theme.service';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
@@ -14,7 +16,7 @@ export class CoreModule {
   static forRoot(): ModuleWithProviders<CoreModule> {
     return {
       ngModule: CoreModule,
-      providers: [PostService],
+      providers: [PostService, ThemeService, UserService],
     };
   }
 }
