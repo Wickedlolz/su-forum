@@ -14,6 +14,14 @@ export interface IUser {
   __v: number;
 }
 
-export interface IUserLoginDto {}
+export interface IUserLoginDto {
+  email: string;
+  password: string;
+}
 
-export interface IUserRegisterDto {}
+export interface IUserRegisterDto {
+  username: string;
+  email: string;
+  tel: string;
+  password: string;
+}
