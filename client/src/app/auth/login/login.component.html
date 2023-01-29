@@ -8,7 +8,10 @@
       ></label>
       <input
         [ngClass]="
-          loginFormGroup.invalid && loginFormGroup.touched ? 'input-error' : ''
+          loginFormGroup.controls['email'].invalid &&
+          loginFormGroup.controls['email'].touched
+            ? 'input-error'
+            : ''
         "
         type="email"
         formControlName="email"
@@ -44,7 +47,10 @@
       ></label>
       <input
         [ngClass]="
-          loginFormGroup.invalid && loginFormGroup.touched ? 'input-error' : ''
+          loginFormGroup.controls['password'].invalid &&
+          loginFormGroup.controls['password'].touched
+            ? 'input-error'
+            : ''
         "
         type="password"
         name="password"
