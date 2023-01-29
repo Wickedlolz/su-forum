@@ -11,3 +11,8 @@ export interface ITheme {
   updatedAt: string;
   __v: 0;
 }
+
+export interface IThemeDto {
+  postText: string;
+  themeName: string;
+}
