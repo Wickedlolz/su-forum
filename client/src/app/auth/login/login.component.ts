@@ -30,6 +30,8 @@ export class LoginComponent {
   ) {}
 
   handleLogin(): void {
+    if (this.loginFormGroup.invalid) return;
+
     const body = {
       email: this.loginFormGroup.value.email,
       password: this.loginFormGroup.value.password,

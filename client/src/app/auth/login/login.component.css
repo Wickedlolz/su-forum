@@ -90,5 +90,10 @@ p.error {
 }
 
 .input-error {
-  border-left-color: red;
+  border-left-color: red !important;
+}
+
+.disabled-btn {
+  background-color: gray;
+  cursor: not-allowed;
 }
