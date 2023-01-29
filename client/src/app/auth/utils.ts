@@ -9,7 +9,7 @@ export function emailValidator(
     return null;
   }
 
-  if (!/.{6,}@(gmail|abv)\.(bg|com)/.test(value)) {
+  if (!/.{5,}@(gmail|abv)\.(bg|com)/.test(value)) {
     return {
       email: true,
     };
