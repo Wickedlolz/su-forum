@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IUser } from '../interfaces/user';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -7,6 +8,10 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
+  get user(): IUser | null {
+    return this.userService.user;
+  }
+
   get isLogged(): boolean {
     return this.userService.isLoggedIn;
   }
