@@ -31,7 +31,7 @@ export class RegisterComponent {
       Validators.minLength(5),
     ]),
     email: new FormControl('', [Validators.required, emailValidator]),
-    tel: new FormControl('', [Validators.required]),
+    tel: new FormControl('', []),
     passwords: new FormGroup({
       password: this.passwordControl,
       rePassword: new FormControl(null, [
