@@ -13,7 +13,12 @@
         ><span><i class="fas fa-user"></i></span
       ></label>
       <input
-        class="input-error"
+        [ngClass]="
+          registerFormGroup.controls['username'].invalid &&
+          registerFormGroup.controls['username'].touched
+            ? 'input-error'
+            : ''
+        "
         type="text"
         name="username"
         formControlName="username"
@@ -47,6 +52,12 @@
         ><span><i class="fas fa-envelope"></i></span
       ></label>
       <input
+        [ngClass]="
+          registerFormGroup.controls['email'].invalid &&
+          registerFormGroup.controls['email'].touched
+            ? 'input-error'
+            : ''
+        "
         type="email"
         name="email"
         formControlName="email"
@@ -98,6 +109,12 @@
           ><span><i class="fas fa-lock"></i></span
         ></label>
         <input
+          [ngClass]="
+            passwordGroup.controls['password'].invalid &&
+            passwordGroup.controls['password'].touched
+              ? 'input-error'
+              : ''
+          "
           type="password"
           name="password"
           formControlName="password"
@@ -131,6 +148,12 @@
           ><span><i class="fas fa-lock"></i></span
         ></label>
         <input
+          [ngClass]="
+            passwordGroup.controls['rePassword'].invalid &&
+            passwordGroup.controls['rePassword'].touched
+              ? 'input-error'
+              : ''
+          "
           type="password"
           name="rePassword"
           formControlName="rePassword"
@@ -159,7 +182,12 @@
       </ng-container>
     </ng-container>
 
-    <button [disabled]="registerFormGroup.invalid">Create Account</button>
+    <button
+      [disabled]="registerFormGroup.invalid"
+      [ngClass]="registerFormGroup.invalid ? 'disabled-btn' : ''"
+    >
+      Create Account
+    </button>
 
     <p class="text-center">
       Have an account?
