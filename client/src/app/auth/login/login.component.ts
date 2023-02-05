@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/core/services/user.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { emailValidator } from '../utils';
 
 @Component({
@@ -24,7 +24,7 @@ export class LoginComponent {
   });
 
   constructor(
-    private userService: UserService,
+    private authService: AuthService,
     private router: Router,
     private formBuilder: FormBuilder
   ) {}
@@ -37,10 +37,10 @@ export class LoginComponent {
       password: this.loginFormGroup.value.password,
     };
 
-    this.userService.login(body).subscribe({
+    this.authService.login(body).subscribe({
       next: (user) => {
-        this.userService.user = user;
-        this.userService.isLoggedIn = true;
+        this.authService.user = user;
+        this.authService.isLoggedIn = true;
         this.router.navigate(['/home']);
       },
       error: (error) => console.error(error),

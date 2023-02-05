@@ -8,28 +8,11 @@ import { IUser, IUserLoginDto, IUserRegisterDto } from '../interfaces/user';
   providedIn: 'root',
 })
 export class UserService {
-  isLoggedIn: boolean = false;
-  user: IUser | null = null;
-
   constructor(private http: HttpClient, private router: Router) {}
 
-  login(userData: IUserLoginDto): Observable<IUser> {
-    return this.http.post<IUser>('http://localhost:3000/api/login', userData, {
+  getUserProfile(): Observable<IUser> {
+    return this.http.get<IUser>('http://localhost:3000/api/users/profile', {
       withCredentials: true,
     });
-  }
-
-  register(userData: IUserRegisterDto): Observable<IUser> {
-    return this.http.post<IUser>(
-      'http://localhost:3000/api/register',
-      userData,
-      { withCredentials: true }
-    );
-  }
-
-  logout(): void {
-    this.isLoggedIn = false;
-    this.user = null;
-    this.router.navigate(['/home']);
   }
 }

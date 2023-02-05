@@ -1,17 +1,23 @@
-<div class="profile">
+<div class="profile" *ngIf="isLoading">
+  <div class="flex">
+    <p class="loading">Loading&hellip;</p>
+  </div>
+</div>
+
+<div class="profile" *ngIf="!isLoading">
   <img src="/assets/profile.png" alt="default user" />
   <h3>User Info:</h3>
   <div class="flex">
     <p>Username:</p>
-    <p>Johny</p>
+    <p>{{ currentUser.username }}</p>
   </div>
   <div class="flex">
     <p>Email:</p>
-    <p>john.doe@gmail.com</p>
+    <p>{{ currentUser.email }}</p>
   </div>
   <div class="flex">
     <p>Phone:</p>
-    <p>+359 885 888 888</p>
+    <p>+359 {{ currentUser.tel }}</p>
   </div>
   <button class="edit-button">Edit</button>
 </div>

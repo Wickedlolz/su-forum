@@ -70,3 +70,8 @@
 .green-button {
   background-color: green;
 }
+
+.loading {
+  width: 100% !important;
+  text-align: center !important;
+}

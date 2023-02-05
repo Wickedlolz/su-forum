@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IUser } from '../interfaces/user';
-import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -9,17 +9,17 @@ import { UserService } from '../services/user.service';
 })
 export class HeaderComponent {
   get user(): IUser | null {
-    return this.userService.user;
+    return this.authService.user;
   }
 
   get isLogged(): boolean {
-    return this.userService.isLoggedIn;
+    return this.authService.isLoggedIn;
   }
 
-  constructor(public userService: UserService) {}
+  constructor(public authService: AuthService) {}
 
   handleLogout($event: MouseEvent): void {
     $event.preventDefault();
-    this.userService.logout();
+    this.authService.logout();
   }
 }

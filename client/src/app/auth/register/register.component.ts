@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IUserRegisterDto } from 'src/app/core/interfaces/user';
-import { UserService } from 'src/app/core/services/user.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { emailValidator, passwordMatch } from '../utils';
 
 @Component({
@@ -43,7 +43,7 @@ export class RegisterComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
@@ -57,10 +57,10 @@ export class RegisterComponent {
       password: this.registerFormGroup.value.passwords.password,
     };
 
-    this.userService.register(body).subscribe({
+    this.authService.register(body).subscribe({
       next: (user) => {
-        this.userService.user = user;
-        this.userService.isLoggedIn = true;
+        this.authService.user = user;
+        this.authService.isLoggedIn = true;
         this.router.navigate(['/home']);
       },
       error: (error) => console.error(error),

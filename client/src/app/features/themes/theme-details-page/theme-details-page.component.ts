@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ITheme } from 'src/app/core/interfaces/theme';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
-import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-theme-details-page',
@@ -16,12 +16,12 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
 
   get isLogged(): boolean {
-    return this.userService.isLoggedIn;
+    return this.authService.isLoggedIn;
   }
 
   constructor(
     private themeService: ThemeService,
-    private userService: UserService,
+    private authService: AuthService,
     private activatedRoute: ActivatedRoute
   ) {}
 

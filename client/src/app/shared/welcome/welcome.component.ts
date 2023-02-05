@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserService } from 'src/app/core/services/user.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-welcome',
@@ -8,8 +8,8 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class WelcomeComponent {
   get isLogged(): boolean {
-    return this.userService.isLoggedIn;
+    return this.authService.isLoggedIn;
   }
 
-  constructor(private userService: UserService) {}
+  constructor(private authService: AuthService) {}
 }
