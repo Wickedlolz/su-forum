@@ -25,19 +25,30 @@
 <div class="profile" *ngIf="!isLoading && isInEditMode">
   <img src="/assets/profile.png" alt="default user" />
   <h3>User Info:</h3>
-  <form action="">
+  <form #editProfileForm="ngForm" (ngSubmit)="handleUpdateProfile()">
     <div class="flex">
       <p>Username:</p>
       <input
         type="text"
         name="username"
+        ngModel
+        required
+        minlength="5"
         id="username"
         [value]="currentUser.username"
       />
     </div>
     <div class="flex">
       <p>Email:</p>
-      <input type="email" name="email" id="email" [value]="currentUser.email" />
+      <input
+        type="email"
+        name="email"
+        ngModel
+        required
+        emailValidator
+        id="email"
+        [value]="currentUser.email"
+      />
     </div>
     <div class="flex">
       <p>Phone:</p>
@@ -45,10 +56,18 @@
         <select name="select-tel" id="select-tel" class="tel">
           <option value="00359">+359</option>
         </select>
-        <input type="text" name="tel" id="tel" [value]="currentUser.tel" />
+        <input
+          type="text"
+          name="tel"
+          ngModel
+          id="tel"
+          [value]="currentUser.tel"
+        />
       </div>
     </div>
     <button class="red-button" (click)="changeProfileMode()">Cancel</button>
-    <button class="green-button">Save</button>
+    <button class="green-button" [disabled]="editProfileForm.invalid">
+      Save
+    </button>
   </form>
 </div>
