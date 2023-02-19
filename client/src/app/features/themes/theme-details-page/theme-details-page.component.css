@@ -208,3 +208,8 @@
 .comment-area {
   min-width: 100%;
 }
+
+.loading {
+  font-weight: bold;
+  text-align: center;
+}

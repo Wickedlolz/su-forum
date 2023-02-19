@@ -1,3 +1,7 @@
-<div class="theme-title">
+<div class="theme-title" *ngIf="isLoading">
+  <p class="loading">Loading&hellip;</p>
+</div>
+
+<div class="theme-title" *ngIf="!isLoading">
   <app-theme-item *ngFor="let theme of themes" [theme]="theme"></app-theme-item>
 </div>

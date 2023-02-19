@@ -1,5 +1,11 @@
-<div class="container">
-  <div class="theme-content" *ngIf="!isLoading">
+<div class="container" *ngIf="isLoading">
+  <div class="theme-content">
+    <p class="loading">Loading&hellip;</p>
+  </div>
+</div>
+
+<div class="container" *ngIf="!isLoading">
+  <div class="theme-content">
     <!-- theme-title  -->
     <div class="theme-title">
       <div class="theme-name-wrapper">

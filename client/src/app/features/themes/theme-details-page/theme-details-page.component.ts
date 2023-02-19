@@ -35,7 +35,10 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
           this.theme = theme;
           this.isLoading = false;
         },
-        error: (error) => console.error(error),
+        error: (error) => {
+          console.error(error);
+          this.isLoading = false;
+        },
       });
     });
   }

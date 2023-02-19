@@ -9,15 +9,21 @@ import { PostService } from 'src/app/core/services/post.service';
 })
 export class AsideComponent implements OnInit {
   posts!: IPost[];
+  isLoading: boolean = true;
 
   constructor(private postService: PostService) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.postService.loadPosts$().subscribe({
       next: (posts) => {
         this.posts = posts;
+        this.isLoading = false;
       },
-      error: (error) => console.error(error),
+      error: (error) => {
+        console.error(error);
+        this.isLoading = false;
+      },
     });
   }
 }

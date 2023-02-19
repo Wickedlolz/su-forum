@@ -10,16 +10,22 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 })
 export class ThemeListComponent implements OnInit, OnDestroy {
   themes!: ITheme[];
+  isLoading: boolean = true;
   subscription!: Subscription;
 
   constructor(private themeService: ThemeService) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.subscription = this.themeService.loadThemes$().subscribe({
       next: (themes) => {
         this.themes = themes;
+        this.isLoading = false;
       },
-      error: (error) => console.error(error),
+      error: (error) => {
+        console.error(error);
+        this.isLoading = false;
+      },
     });
   }
 
