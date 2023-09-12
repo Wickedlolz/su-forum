@@ -5,5 +5,5 @@ const errorHandler = require('./errHandler');
 module.exports = {
     jwt,
     auth,
-    errorHandler
-}
+    errorHandler,
+};

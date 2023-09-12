@@ -9,7 +9,7 @@ module.exports = (app) => {
 
     app.use(cookieParser(cookieSecret));
 
-    app.use(express.static(path.resolve(__basedir, 'static')));
+    app.use(express.static(path.resolve(global.__basedir, 'static')));
 
     // app.use(errorHandler(err, req, res, next));
 };

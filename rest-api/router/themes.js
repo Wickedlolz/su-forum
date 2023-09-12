@@ -14,6 +14,4 @@ router.put('/:themeId', auth(), themeController.subscribe);
 router.put('/:themeId/posts/:postId', auth(), postController.editPost);
 router.delete('/:themeId/posts/:postId', auth(), postController.deletePost);
 
-// router.get('/my-trips/:id/reservations', auth(), themeController.getReservations);
-
-module.exports = router
+module.exports = router;

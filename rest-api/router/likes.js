@@ -7,4 +7,4 @@ const { postController } = require('../controllers');
 
 router.put('/:postId', auth(), postController.like);
 
-module.exports = router
+module.exports = router;
