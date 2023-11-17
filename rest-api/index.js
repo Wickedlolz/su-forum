@@ -1,31 +1,27 @@
-global.__basedir = __dirname;
-require('dotenv').config();
-const dbConnector = require('./config/db');
-const apiRouter = require('./router');
-const cors = require('cors');
-const { errorHandler } = require('./utils');
+import express from "express";
+import dotenv from "dotenv";
+import epxressConfig from "./src/config/express.js";
+import mongooseConfig from "./src/config/mongoose.js";
+import router from "./src/config/routes.js";
+import errorHandler from "./src/utils/errorHandler.js";
 
-dbConnector()
-    .then(() => {
-        const config = require('./config/config');
+dotenv.config();
 
-        const app = require('express')();
-        require('./config/express')(app);
+init();
 
-        app.use(
-            cors({
-                origin: config.origin,
-                credentials: true,
-            })
-        );
+async function init() {
+  await mongooseConfig();
 
-        app.use('/api', apiRouter);
+  const app = express();
+  epxressConfig(app);
+  app.use(router);
 
-        app.use(errorHandler);
+  app.use(errorHandler);
 
-        app.listen(
-            config.port,
-            console.log(`Listening on port ${config.port}!`)
-        );
-    })
-    .catch(console.error);
+  app.listen(process.env.PORT, () =>
+    console.log(
+      "🚀 [server]: Server is up and running on port:",
+      process.env.PORT
+    )
+  );
+}

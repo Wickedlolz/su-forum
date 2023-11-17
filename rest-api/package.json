@@ -1,27 +1,28 @@
 {
-    "name": "rest-api",
-    "version": "1.0.0",
-    "description": "REST-api for back-end of React project",
-    "main": "index.js",
-    "scripts": {
-        "start": "node .",
-        "dev": "nodemon ."
-    },
-    "keywords": [
-        "rest-api"
-    ],
-    "author": "Viktor Dimitrov",
-    "license": "ISC",
-    "dependencies": {
-        "bcrypt": "^5.0.0",
-        "cookie-parser": "^1.4.5",
-        "cors": "^2.8.5",
-        "dotenv": "^8.2.0",
-        "express": "^4.17.1",
-        "jsonwebtoken": "^8.5.1",
-        "mongoose": "^5.9.19"
-    },
-    "devDependencies": {
-        "nodemon": "^2.0.4"
-    }
+  "name": "rest-api",
+  "version": "1.0.0",
+  "description": "SoftUni Forum Rest API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test:watch": "mocha --watch ./src/tests/*.spec.js"
+  },
+  "author": "Viktor Dimitrov",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.1"
+  },
+  "devDependencies": {
+    "chai": "^4.3.10",
+    "dotenv": "^16.3.1",
+    "mocha": "^10.2.0",
+    "nodemon": "^3.0.1"
+  }
 }
