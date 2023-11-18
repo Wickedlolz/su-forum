@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, switchMap, tap } from 'rxjs';
 import { ITheme } from 'src/app/core/interfaces/theme';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
@@ -26,21 +26,24 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.isLoading = true;
-    this.subscription = this.activatedRoute.params.subscribe((params) => {
-      const themeId = params['themeId'];
-
-      this.themeService.loadThemeById(themeId).subscribe({
+    this.subscription = this.activatedRoute.params
+      .pipe(
+        tap((params) => {
+          this.isLoading = true;
+        }),
+        switchMap((params) => {
+          return this.themeService.loadThemeById$(params['themeId']);
+        })
+      )
+      .subscribe({
         next: (theme) => {
           this.theme = theme;
           this.isLoading = false;
         },
         error: (error) => {
           console.error(error);
-          this.isLoading = false;
         },
       });
-    });
   }
 
   ngOnDestroy(): void {
