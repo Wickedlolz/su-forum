@@ -14,21 +14,25 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   login(userData: IUserLoginDto): Observable<IUser> {
-    return this.http.post<IUser>('http://localhost:3000/api/login', userData, {
-      withCredentials: true,
-    });
+    return this.http.post<IUser>(
+      'http://localhost:5000/api/v1/auth/login',
+      userData,
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   register(userData: IUserRegisterDto): Observable<IUser> {
     return this.http.post<IUser>(
-      'http://localhost:3000/api/register',
+      'http://localhost:5000/api/v1/auth/register',
       userData,
       { withCredentials: true }
     );
   }
 
   authenticate(): Observable<IUser> {
-    return this.http.get<IUser>('http://localhost:3000/api/users/profile', {
+    return this.http.get<IUser>('http://localhost:5000/api/v1/users/profile', {
       withCredentials: true,
     });
   }

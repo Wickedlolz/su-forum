@@ -11,7 +11,7 @@ export class UserService {
   constructor(private http: HttpClient, private router: Router) {}
 
   getUserProfile(): Observable<IUser> {
-    return this.http.get<IUser>('http://localhost:3000/api/users/profile', {
+    return this.http.get<IUser>('http://localhost:5000/api/v1/users/profile', {
       withCredentials: true,
     });
   }

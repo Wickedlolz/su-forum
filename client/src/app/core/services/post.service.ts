@@ -10,6 +10,6 @@ export class PostService {
   constructor(private http: HttpClient) {}
 
   loadPosts$(): Observable<IPost[]> {
-    return this.http.get<IPost[]>('http://localhost:3000/api/posts?limit=5');
+    return this.http.get<IPost[]>('http://localhost:5000/api/v1/posts?limit=5');
   }
 }

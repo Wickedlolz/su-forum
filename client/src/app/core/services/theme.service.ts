@@ -10,16 +10,18 @@ export class ThemeService {
   constructor(private http: HttpClient) {}
 
   loadThemes$(): Observable<ITheme[]> {
-    return this.http.get<ITheme[]>('http://localhost:3000/api/themes');
+    return this.http.get<ITheme[]>('http://localhost:5000/api/v1/themes');
   }
 
   loadThemeById(themeId: string): Observable<ITheme> {
-    return this.http.get<ITheme>('http://localhost:3000/api/themes/' + themeId);
+    return this.http.get<ITheme>(
+      'http://localhost:5000/api/v1/themes/' + themeId
+    );
   }
 
   addTheme(themeData: IThemeDto): Observable<ITheme> {
     return this.http.post<ITheme>(
-      'http://localhost:3000/api/themes',
+      'http://localhost:5000/api/v1/themes',
       themeData,
       { withCredentials: true }
     );

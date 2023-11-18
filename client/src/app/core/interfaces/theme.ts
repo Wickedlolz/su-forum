@@ -7,7 +7,7 @@ export interface ITheme {
   _id: string;
   themeName: string;
   userId: IUser;
-  created_at: string;
+  createdAt: string;
   updatedAt: string;
   __v: 0;
 }
