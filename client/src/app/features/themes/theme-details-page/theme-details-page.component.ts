@@ -28,7 +28,7 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.activatedRoute.params
       .pipe(
-        tap((params) => {
+        tap(() => {
           this.isLoading = true;
         }),
         switchMap((params) => {
