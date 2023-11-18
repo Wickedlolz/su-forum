@@ -148,6 +148,15 @@ button:hover {
   cursor: pointer;
 }
 
+.container {
+  width: 90%;
+  margin: auto;
+  padding-bottom: 4.5em;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+
 @media (min-width: 800px) {
   html {
     font-size: 14px;

@@ -1,197 +1,199 @@
-<form
-  class="register"
-  [formGroup]="registerFormGroup"
-  (ngSubmit)="handleRegister()"
-  method="post"
->
-  <fieldset>
-    <h2>Registration Form</h2>
+<div class="container">
+  <form
+    class="register"
+    [formGroup]="registerFormGroup"
+    (ngSubmit)="handleRegister()"
+    method="post"
+  >
+    <fieldset>
+      <h2>Registration Form</h2>
 
-    <!-- username -->
-    <p class="field field-icon">
-      <label for="username"
-        ><span><i class="fas fa-user"></i></span
-      ></label>
-      <input
-        [ngClass]="
-          registerFormGroup.controls['username'].invalid &&
-          registerFormGroup.controls['username'].touched
-            ? 'input-error'
-            : ''
-        "
-        type="text"
-        name="username"
-        formControlName="username"
-        id="username"
-        placeholder="Johny"
-      />
-    </p>
-    <ng-container
-      *ngIf="
-        registerFormGroup.controls['username'].touched &&
-        registerFormGroup.controls['username'].invalid
-      "
-    >
-      <p
-        *ngIf="registerFormGroup.controls['username'].errors?.['required']"
-        class="error"
-      >
-        Username is required!
-      </p>
-      <p
-        *ngIf="registerFormGroup.controls['username'].errors?.['minlength']"
-        class="error"
-      >
-        Username must be at least 5 characters long.
-      </p>
-    </ng-container>
-
-    <!-- email -->
-    <p class="field field-icon">
-      <label for="email"
-        ><span><i class="fas fa-envelope"></i></span
-      ></label>
-      <input
-        [ngClass]="
-          registerFormGroup.controls['email'].invalid &&
-          registerFormGroup.controls['email'].touched
-            ? 'input-error'
-            : ''
-        "
-        type="email"
-        name="email"
-        formControlName="email"
-        id="email"
-        placeholder="john.doe@gmail.com"
-      />
-    </p>
-    <ng-container
-      *ngIf="
-        registerFormGroup.controls['email'].touched &&
-        registerFormGroup.controls['email'].invalid
-      "
-    >
-      <p
-        class="error"
-        *ngIf="registerFormGroup.controls['email'].errors?.['required']"
-      >
-        Email is required!
-      </p>
-      <p
-        class="error"
-        *ngIf="registerFormGroup.controls['email'].errors?.['email']"
-      >
-        Email is not valid!
-      </p>
-    </ng-container>
-
-    <!-- telephone -->
-    <p class="field field-icon">
-      <label for="tel"
-        ><span><i class="fas fa-phone"></i></span
-      ></label>
-      <select name="select-tel" id="select-tel" class="tel">
-        <option value="00359">+359</option>
-      </select>
-      <input
-        type="text"
-        name="tel"
-        formControlName="tel"
-        id="tel"
-        placeholder="885 888 888"
-      />
-    </p>
-
-    <!-- password -->
-    <ng-container formGroupName="passwords">
+      <!-- username -->
       <p class="field field-icon">
-        <label for="password"
-          ><span><i class="fas fa-lock"></i></span
+        <label for="username"
+          ><span><i class="fas fa-user"></i></span
         ></label>
         <input
           [ngClass]="
-            passwordGroup.controls['password'].invalid &&
-            passwordGroup.controls['password'].touched
+            registerFormGroup.controls['username'].invalid &&
+            registerFormGroup.controls['username'].touched
               ? 'input-error'
               : ''
           "
-          type="password"
-          name="password"
-          formControlName="password"
-          id="password"
-          placeholder="******"
+          type="text"
+          name="username"
+          formControlName="username"
+          id="username"
+          placeholder="Johny"
         />
       </p>
       <ng-container
         *ngIf="
-          passwordGroup.controls['password'].touched &&
-          passwordGroup.controls['password'].invalid
+          registerFormGroup.controls['username'].touched &&
+          registerFormGroup.controls['username'].invalid
         "
       >
         <p
+          *ngIf="registerFormGroup.controls['username'].errors?.['required']"
           class="error"
-          *ngIf="passwordGroup.controls['password'].errors?.['required']"
         >
-          Password is required!
+          Username is required!
         </p>
         <p
+          *ngIf="registerFormGroup.controls['username'].errors?.['minlength']"
           class="error"
-          *ngIf="passwordGroup.controls['password'].errors?.['minlength']"
         >
-          Password must be at least 5 characters!
+          Username must be at least 5 characters long.
         </p>
       </ng-container>
 
-      <!-- rePassword -->
+      <!-- email -->
       <p class="field field-icon">
-        <label for="rePassword"
-          ><span><i class="fas fa-lock"></i></span
+        <label for="email"
+          ><span><i class="fas fa-envelope"></i></span
         ></label>
         <input
           [ngClass]="
-            passwordGroup.controls['rePassword'].invalid &&
-            passwordGroup.controls['rePassword'].touched
+            registerFormGroup.controls['email'].invalid &&
+            registerFormGroup.controls['email'].touched
               ? 'input-error'
               : ''
           "
-          type="password"
-          name="rePassword"
-          formControlName="rePassword"
-          id="rePassword"
-          placeholder="******"
+          type="email"
+          name="email"
+          formControlName="email"
+          id="email"
+          placeholder="john.doe@gmail.com"
         />
       </p>
       <ng-container
         *ngIf="
-          passwordGroup.controls['rePassword'].touched &&
-          passwordGroup.controls['rePassword'].invalid
+          registerFormGroup.controls['email'].touched &&
+          registerFormGroup.controls['email'].invalid
         "
       >
         <p
           class="error"
-          *ngIf="passwordGroup.controls['rePassword'].errors?.['required']"
+          *ngIf="registerFormGroup.controls['email'].errors?.['required']"
         >
-          Repeat Password is required!
+          Email is required!
         </p>
         <p
           class="error"
-          *ngIf="passwordGroup.controls['rePassword'].errors?.['passwordMissMatch']"
+          *ngIf="registerFormGroup.controls['email'].errors?.['email']"
         >
-          Repeat Password does not match password!
+          Email is not valid!
         </p>
       </ng-container>
-    </ng-container>
 
-    <button
-      [disabled]="registerFormGroup.invalid"
-      [ngClass]="registerFormGroup.invalid ? 'disabled-btn' : ''"
-    >
-      Create Account
-    </button>
+      <!-- telephone -->
+      <p class="field field-icon">
+        <label for="tel"
+          ><span><i class="fas fa-phone"></i></span
+        ></label>
+        <select name="select-tel" id="select-tel" class="tel">
+          <option value="00359">+359</option>
+        </select>
+        <input
+          type="text"
+          name="tel"
+          formControlName="tel"
+          id="tel"
+          placeholder="885 888 888"
+        />
+      </p>
 
-    <p class="text-center">
-      Have an account?
-      <a routerLink="/user/login">Log In</a>
-    </p>
-  </fieldset>
-</form>
+      <!-- password -->
+      <ng-container formGroupName="passwords">
+        <p class="field field-icon">
+          <label for="password"
+            ><span><i class="fas fa-lock"></i></span
+          ></label>
+          <input
+            [ngClass]="
+              passwordGroup.controls['password'].invalid &&
+              passwordGroup.controls['password'].touched
+                ? 'input-error'
+                : ''
+            "
+            type="password"
+            name="password"
+            formControlName="password"
+            id="password"
+            placeholder="******"
+          />
+        </p>
+        <ng-container
+          *ngIf="
+            passwordGroup.controls['password'].touched &&
+            passwordGroup.controls['password'].invalid
+          "
+        >
+          <p
+            class="error"
+            *ngIf="passwordGroup.controls['password'].errors?.['required']"
+          >
+            Password is required!
+          </p>
+          <p
+            class="error"
+            *ngIf="passwordGroup.controls['password'].errors?.['minlength']"
+          >
+            Password must be at least 5 characters!
+          </p>
+        </ng-container>
+
+        <!-- rePassword -->
+        <p class="field field-icon">
+          <label for="rePassword"
+            ><span><i class="fas fa-lock"></i></span
+          ></label>
+          <input
+            [ngClass]="
+              passwordGroup.controls['rePassword'].invalid &&
+              passwordGroup.controls['rePassword'].touched
+                ? 'input-error'
+                : ''
+            "
+            type="password"
+            name="rePassword"
+            formControlName="rePassword"
+            id="rePassword"
+            placeholder="******"
+          />
+        </p>
+        <ng-container
+          *ngIf="
+            passwordGroup.controls['rePassword'].touched &&
+            passwordGroup.controls['rePassword'].invalid
+          "
+        >
+          <p
+            class="error"
+            *ngIf="passwordGroup.controls['rePassword'].errors?.['required']"
+          >
+            Repeat Password is required!
+          </p>
+          <p
+            class="error"
+            *ngIf="passwordGroup.controls['rePassword'].errors?.['passwordMissMatch']"
+          >
+            Repeat Password does not match password!
+          </p>
+        </ng-container>
+      </ng-container>
+
+      <button
+        [disabled]="registerFormGroup.invalid"
+        [ngClass]="registerFormGroup.invalid ? 'disabled-btn' : ''"
+      >
+        Create Account
+      </button>
+
+      <p class="text-center">
+        Have an account?
+        <a routerLink="/user/login">Log In</a>
+      </p>
+    </fieldset>
+  </form>
+</div>

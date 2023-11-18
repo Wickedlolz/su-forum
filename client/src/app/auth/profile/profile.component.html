@@ -4,70 +4,72 @@
   </div>
 </div>
 
-<div class="profile" *ngIf="!isLoading && !isInEditMode">
-  <img src="/assets/profile.png" alt="default user" />
-  <h3>User Info:</h3>
-  <div class="flex">
-    <p>Username:</p>
-    <p>{{ currentUser.username }}</p>
-  </div>
-  <div class="flex">
-    <p>Email:</p>
-    <p>{{ currentUser.email }}</p>
-  </div>
-  <div class="flex">
-    <p>Phone:</p>
-    <p>+359 {{ currentUser.tel }}</p>
-  </div>
-  <button class="edit-button" (click)="changeProfileMode()">Edit</button>
-</div>
-
-<div class="profile" *ngIf="!isLoading && isInEditMode">
-  <img src="/assets/profile.png" alt="default user" />
-  <h3>User Info:</h3>
-  <form #editProfileForm="ngForm" (ngSubmit)="handleUpdateProfile()">
+<div class="container">
+  <div class="profile" *ngIf="!isLoading && !isInEditMode">
+    <img src="/assets/profile.png" alt="default user" />
+    <h3>User Info:</h3>
     <div class="flex">
       <p>Username:</p>
-      <input
-        type="text"
-        name="username"
-        ngModel
-        required
-        minlength="5"
-        id="username"
-        [value]="currentUser.username"
-      />
+      <p>{{ currentUser.username }}</p>
     </div>
     <div class="flex">
       <p>Email:</p>
-      <input
-        type="email"
-        name="email"
-        ngModel
-        required
-        appEmailValidator
-        id="email"
-        [value]="currentUser.email"
-      />
+      <p>{{ currentUser.email }}</p>
     </div>
     <div class="flex">
       <p>Phone:</p>
-      <div>
-        <select name="select-tel" id="select-tel" class="tel">
-          <option value="00359">+359</option>
-        </select>
+      <p>+359 {{ currentUser.tel }}</p>
+    </div>
+    <button class="edit-button" (click)="changeProfileMode()">Edit</button>
+  </div>
+
+  <div class="profile" *ngIf="!isLoading && isInEditMode">
+    <img src="/assets/profile.png" alt="default user" />
+    <h3>User Info:</h3>
+    <form #editProfileForm="ngForm" (ngSubmit)="handleUpdateProfile()">
+      <div class="flex">
+        <p>Username:</p>
         <input
           type="text"
-          name="tel"
+          name="username"
           ngModel
-          id="tel"
-          [value]="currentUser.tel"
+          required
+          minlength="5"
+          id="username"
+          [value]="currentUser.username"
         />
       </div>
-    </div>
-    <button class="red-button" (click)="changeProfileMode()">Cancel</button>
-    <button class="green-button" [disabled]="editProfileForm.invalid">
-      Save
-    </button>
-  </form>
+      <div class="flex">
+        <p>Email:</p>
+        <input
+          type="email"
+          name="email"
+          ngModel
+          required
+          appEmailValidator
+          id="email"
+          [value]="currentUser.email"
+        />
+      </div>
+      <div class="flex">
+        <p>Phone:</p>
+        <div class="edit-tel">
+          <select name="select-tel" id="select-tel" class="tel">
+            <option value="00359">+359</option>
+          </select>
+          <input
+            type="text"
+            name="tel"
+            ngModel
+            id="tel"
+            [value]="currentUser.tel"
+          />
+        </div>
+      </div>
+      <button class="red-button" (click)="changeProfileMode()">Cancel</button>
+      <button class="green-button" [disabled]="editProfileForm.invalid">
+        Save
+      </button>
+    </form>
+  </div>
 </div>
