@@ -1,6 +1,3 @@
-import { IPost } from './post';
-import { ITheme } from './theme';
-
 export interface IUser {
   themes: string[];
   posts: string[];
