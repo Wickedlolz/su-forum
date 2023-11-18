@@ -13,7 +13,7 @@ export class ThemeService {
     return this.http.get<ITheme[]>('http://localhost:5000/api/v1/themes');
   }
 
-  loadThemeById(themeId: string): Observable<ITheme> {
+  loadThemeById$(themeId: string): Observable<ITheme> {
     return this.http.get<ITheme>(
       'http://localhost:5000/api/v1/themes/' + themeId
     );
