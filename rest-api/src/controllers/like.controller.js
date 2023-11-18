@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { postService } from "../services/index.js";
-import { isAuth } from "../middlewares/guards.js";
+import { isAuth } from "../middlewares/guards.middleware.js";
 
 const router = Router();
 

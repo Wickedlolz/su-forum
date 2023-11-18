@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import authMiddleware from "../middlewares/auth.js";
+import authMiddleware from "../middlewares/auth.middleware.js";
 
 const whitelist = ["http://localhost:5000", "http://localhost:4200"];
 
