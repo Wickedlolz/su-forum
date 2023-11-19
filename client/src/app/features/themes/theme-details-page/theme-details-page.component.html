@@ -1,10 +1,4 @@
-<div class="container" *ngIf="isLoading">
-  <div class="theme-content">
-    <p class="loading">Loading&hellip;</p>
-  </div>
-</div>
-
-<div class="container" *ngIf="!isLoading">
+<div class="container" *ngIf="!isLoading; else loadingIndicator">
   <div class="theme-content">
     <!-- theme-title  -->
     <div class="theme-title">
@@ -62,3 +56,11 @@
     </div>
   </div>
 </div>
+
+<ng-template #loadingIndicator>
+  <div class="container" *ngIf="isLoading">
+    <div class="theme-content">
+      <p class="loading">Loading&hellip;</p>
+    </div>
+  </div>
+</ng-template>
