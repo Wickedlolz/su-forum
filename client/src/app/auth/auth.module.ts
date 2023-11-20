@@ -6,9 +6,21 @@ import { ProfileComponent } from './profile/profile.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmailValidatorDirective } from './email-validator.directive';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, ProfileComponent, EmailValidatorDirective],
-  imports: [CommonModule, AuthRoutingModule, ReactiveFormsModule, FormsModule],
+  declarations: [
+    LoginComponent,
+    RegisterComponent,
+    ProfileComponent,
+    EmailValidatorDirective,
+  ],
+  imports: [
+    CommonModule,
+    AuthRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    SharedModule,
+  ],
 })
 export class AuthModule {}
