@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class ThemeItemComponent {
   @Input() theme!: ITheme;
 
-  get canSubscribe(): boolean | undefined {
+  get canSubscribe(): boolean {
     return !this.theme.subscribers.includes(this.authService.user!._id);
   }
 
