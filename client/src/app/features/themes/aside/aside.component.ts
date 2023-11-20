@@ -15,7 +15,7 @@ export class AsideComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.postService.loadPosts$().subscribe({
+    this.postService.loadPosts$(5).subscribe({
       next: (posts) => {
         this.posts = posts;
         this.isLoading = false;

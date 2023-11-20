@@ -2,6 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ITheme, IThemeDto } from '../interfaces/theme';
+import { environment } from 'src/environments/environment';
+
+const apiUrl = environment.apiUrl;
+
+const endpoints = {
+  themes: '/themes',
+  themeById: (themeId: string) => `/themes/${themeId}`,
+};
 
 @Injectable({
   providedIn: 'root',
@@ -10,20 +18,16 @@ export class ThemeService {
   constructor(private http: HttpClient) {}
 
   loadThemes$(): Observable<ITheme[]> {
-    return this.http.get<ITheme[]>('http://localhost:5000/api/v1/themes');
+    return this.http.get<ITheme[]>(`${apiUrl}${endpoints.themes}`);
   }
 
   loadThemeById$(themeId: string): Observable<ITheme> {
-    return this.http.get<ITheme>(
-      'http://localhost:5000/api/v1/themes/' + themeId
-    );
+    return this.http.get<ITheme>(`${apiUrl}${endpoints.themeById(themeId)}`);
   }
 
   addTheme(themeData: IThemeDto): Observable<ITheme> {
-    return this.http.post<ITheme>(
-      'http://localhost:5000/api/v1/themes',
-      themeData,
-      { withCredentials: true }
-    );
+    return this.http.post<ITheme>(`${apiUrl}${endpoints.themes}`, themeData, {
+      withCredentials: true,
+    });
   }
 }

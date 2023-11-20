@@ -2,6 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IPost } from '../interfaces/post';
+import { environment } from 'src/environments/environment';
+
+const apiUrl = environment.apiUrl;
+
+const endpoints = {
+  posts: (limit?: number) => `/posts${limit ? '?limit=' + limit : ''}`,
+};
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +16,7 @@ import { IPost } from '../interfaces/post';
 export class PostService {
   constructor(private http: HttpClient) {}
 
-  loadPosts$(): Observable<IPost[]> {
-    return this.http.get<IPost[]>('http://localhost:5000/api/v1/posts?limit=5');
+  loadPosts$(limit?: number): Observable<IPost[]> {
+    return this.http.get<IPost[]>(`${apiUrl}${endpoints.posts(limit)}`);
   }
 }
