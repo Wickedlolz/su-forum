@@ -1,5 +1,6 @@
 <div class="container" *ngIf="!isLoading; else loadingIndicator">
   <div class="theme-content">
+    <app-welcome *ngIf="!isLogged"></app-welcome>
     <!-- theme-title  -->
     <div class="theme-title">
       <div class="theme-name-wrapper">
