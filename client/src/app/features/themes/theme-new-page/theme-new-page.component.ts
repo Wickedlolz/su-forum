@@ -12,7 +12,6 @@ export class ThemeNewPageComponent {
   constructor(private router: Router, private themeService: ThemeService) {}
 
   handleAddNewTheme(newThemeForm: NgForm): void {
-    console.log(newThemeForm.value);
     this.themeService.addTheme(newThemeForm.value).subscribe({
       next: (newTheme) => {
         this.router.navigate(['/themes']);
