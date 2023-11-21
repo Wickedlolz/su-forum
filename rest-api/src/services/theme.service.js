@@ -2,7 +2,9 @@ import Theme from '../models/theme.model.js';
 import { createPost } from './post.service.js';
 
 export const getThemes = async () => {
-    const themes = await Theme.find({}).populate('userId');
+    const themes = await Theme.find({})
+        .sort({ createdAt: -1 })
+        .populate('userId');
     return themes;
 };
 
