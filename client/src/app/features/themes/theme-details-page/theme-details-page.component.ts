@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, switchMap, tap } from 'rxjs';
-import { ITheme } from 'src/app/core/interfaces/theme';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
+import { ITheme } from 'src/app/core/interfaces/theme';
 
 @Component({
   selector: 'app-theme-details-page',

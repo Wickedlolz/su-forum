@@ -6,8 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IUserRegisterDto } from 'src/app/core/interfaces/user';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { IUserRegisterDto } from 'src/app/core/interfaces/user';
 import { emailValidator, passwordMatch } from '../utils';
 
 @Component({

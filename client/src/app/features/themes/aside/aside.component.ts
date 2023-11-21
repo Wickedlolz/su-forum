@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { IPost } from 'src/app/core/interfaces/post';
 import { PostService } from 'src/app/core/services/post.service';
+import { IPost } from 'src/app/core/interfaces/post';
 
 @Component({
   selector: 'app-aside',

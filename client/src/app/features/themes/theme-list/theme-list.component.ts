@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ITheme } from 'src/app/core/interfaces/theme';
 import { ThemeService } from 'src/app/core/services/theme.service';
+import { ITheme } from 'src/app/core/interfaces/theme';
 
 @Component({
   selector: 'app-theme-list',

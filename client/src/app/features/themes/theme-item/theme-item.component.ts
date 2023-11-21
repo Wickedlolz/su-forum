@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { ITheme } from 'src/app/core/interfaces/theme';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { ITheme } from 'src/app/core/interfaces/theme';
 
 @Component({
   selector: 'app-theme-item',

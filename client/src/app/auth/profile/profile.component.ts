@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { IUser } from 'src/app/core/interfaces/user';
 import { UserService } from 'src/app/core/services/user.service';
+import { IUser } from 'src/app/core/interfaces/user';
 
 @Component({
   selector: 'app-profile',
