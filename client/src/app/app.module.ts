@@ -8,6 +8,7 @@ import { CoreModule } from './core/core.module';
 import { ThemesModule } from './features/themes/themes.module';
 import { SharedModule } from './shared/shared.module';
 import { PagesModule } from './features/pages/pages.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +17,7 @@ import { PagesModule } from './features/pages/pages.module';
     AppRoutingModule,
     HttpClientModule,
     CoreModule.forRoot(),
+    AuthModule,
     ThemesModule,
     SharedModule,
     PagesModule,
