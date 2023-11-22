@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ITheme, IThemeDto } from '../interfaces/theme';
 import { environment } from 'src/environments/environment';
+import { IPost } from '../interfaces/post';
 
 const apiUrl = environment.apiUrl;
 
@@ -21,8 +22,10 @@ export class ThemeService {
     return this.http.get<ITheme[]>(`${apiUrl}${endpoints.themes}`);
   }
 
-  loadThemeById$(themeId: string): Observable<ITheme> {
-    return this.http.get<ITheme>(`${apiUrl}${endpoints.themeById(themeId)}`);
+  loadThemeById$(themeId: string): Observable<ITheme<IPost>> {
+    return this.http.get<ITheme<IPost>>(
+      `${apiUrl}${endpoints.themeById(themeId)}`
+    );
   }
 
   addTheme(themeData: IThemeDto): Observable<ITheme> {

@@ -12,7 +12,7 @@ import { IPost } from 'src/app/core/interfaces/post';
   styleUrls: ['./theme-details-page.component.css'],
 })
 export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
-  theme!: ITheme;
+  theme!: ITheme<IPost>;
   isLoading: boolean = true;
   subscription!: Subscription;
 

@@ -1,9 +1,8 @@
-import { IPost } from './post';
 import { IUser } from './user';
 
-export interface ITheme {
+export interface ITheme<T = string> {
   subscribers: string[];
-  posts: IPost[];
+  posts: T[];
   _id: string;
   themeName: string;
   userId: IUser;
