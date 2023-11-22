@@ -4,6 +4,7 @@ import { Subscription, switchMap, tap } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
 import { ITheme } from 'src/app/core/interfaces/theme';
+import { IPost } from 'src/app/core/interfaces/post';
 
 @Component({
   selector: 'app-theme-details-page',
@@ -14,6 +15,10 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
   theme!: ITheme;
   isLoading: boolean = true;
   subscription!: Subscription;
+
+  get canSubscribe() {
+    return !this.theme.subscribers.includes(this.authService.user?._id || '');
+  }
 
   get isLogged(): boolean {
     return this.authService.isLoggedIn;
@@ -48,5 +53,9 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  canLike(comment: IPost): boolean {
+    return !comment.likes.includes(this.authService.user?._id || '');
   }
 }

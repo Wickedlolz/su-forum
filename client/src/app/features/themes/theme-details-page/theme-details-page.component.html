@@ -14,8 +14,12 @@
           <p>
             Subscribers: <span>{{ theme.subscribers.length }}</span>
           </p>
-          <button class="subscribe">Subscribe</button>
-          <!-- <button class="unsubscribe">Unsubscribe</button> -->
+          <button *ngIf="isLogged && canSubscribe" class="subscribe">
+            Subscribe
+          </button>
+          <button *ngIf="isLogged && !canSubscribe" class="unsubscribe">
+            Unsubscribe
+          </button>
         </div>
       </div>
     </div>
@@ -38,8 +42,8 @@
         </div>
       </div>
       <div class="footer">
-        <!-- <i class="fas fa-thumbs-up"></i>
-                      <i class="fas fa-thumbs-down"></i> -->
+        <i *ngIf="isLogged && canLike(comment)" class="fas fa-thumbs-up"></i>
+        <i *ngIf="isLogged && !canLike(comment)" class="fas fa-thumbs-down"></i>
         <p>
           <span>{{ comment.likes.length }}</span> likes
         </p>
