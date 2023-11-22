@@ -18,8 +18,7 @@
         <div class="subscribers">
           <button
             *ngIf="isLoggedIn"
-            [class.subscribe]="canSubscribe"
-            [class.unsubscribe]="!canSubscribe"
+            [ngClass]="{ subscribe: canSubscribe, unsubscribe: !canSubscribe }"
           >
             {{ canSubscribe ? "Subscribe" : "Unsubscribe" }}
           </button>
