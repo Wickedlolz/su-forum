@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { IUser } from '../interfaces/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -16,10 +17,19 @@ export class HeaderComponent {
     return this.authService.isLoggedIn;
   }
 
-  constructor(public authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   handleLogout($event: MouseEvent): void {
     $event.preventDefault();
-    this.authService.logout();
+    this.authService.logout().subscribe({
+      next: () => {
+        this.authService.isLoggedIn = false;
+        this.authService.user = null;
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }
