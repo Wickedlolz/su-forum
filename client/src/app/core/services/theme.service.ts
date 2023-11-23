@@ -16,21 +16,25 @@ const endpoints = {
   providedIn: 'root',
 })
 export class ThemeService {
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
   loadThemes$(): Observable<ITheme[]> {
-    return this.http.get<ITheme[]>(`${apiUrl}${endpoints.themes}`);
+    return this.httpClient.get<ITheme[]>(`${apiUrl}${endpoints.themes}`);
   }
 
   loadThemeById$(themeId: string): Observable<ITheme<IPost>> {
-    return this.http.get<ITheme<IPost>>(
+    return this.httpClient.get<ITheme<IPost>>(
       `${apiUrl}${endpoints.themeById(themeId)}`
     );
   }
 
   addTheme(themeData: IThemeDto): Observable<ITheme> {
-    return this.http.post<ITheme>(`${apiUrl}${endpoints.themes}`, themeData, {
-      withCredentials: true,
-    });
+    return this.httpClient.post<ITheme>(
+      `${apiUrl}${endpoints.themes}`,
+      themeData,
+      {
+        withCredentials: true,
+      }
+    );
   }
 }

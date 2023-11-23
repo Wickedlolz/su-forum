@@ -20,28 +20,36 @@ export class AuthService {
   isLoggedIn: boolean = false;
   user: IUser | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
   login(userData: IUserLoginDto): Observable<IUser> {
-    return this.http.post<IUser>(`${apiUrl}${endpoints.login}`, userData, {
-      withCredentials: true,
-    });
+    return this.httpClient.post<IUser>(
+      `${apiUrl}${endpoints.login}`,
+      userData,
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   register(userData: IUserRegisterDto): Observable<IUser> {
-    return this.http.post<IUser>(`${apiUrl}${endpoints.register}`, userData, {
-      withCredentials: true,
-    });
+    return this.httpClient.post<IUser>(
+      `${apiUrl}${endpoints.register}`,
+      userData,
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   authenticate(): Observable<IUser> {
-    return this.http.get<IUser>(`${apiUrl}${endpoints.profile}`, {
+    return this.httpClient.get<IUser>(`${apiUrl}${endpoints.profile}`, {
       withCredentials: true,
     });
   }
 
   logout() {
-    return this.http.get(`${apiUrl}${endpoints.logout}`, {
+    return this.httpClient.get(`${apiUrl}${endpoints.logout}`, {
       withCredentials: true,
     });
   }

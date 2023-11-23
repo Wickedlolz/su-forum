@@ -14,9 +14,9 @@ const endpoints = {
   providedIn: 'root',
 })
 export class PostService {
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
   loadPosts$(limit?: number): Observable<IPost[]> {
-    return this.http.get<IPost[]>(`${apiUrl}${endpoints.posts(limit)}`);
+    return this.httpClient.get<IPost[]>(`${apiUrl}${endpoints.posts(limit)}`);
   }
 }

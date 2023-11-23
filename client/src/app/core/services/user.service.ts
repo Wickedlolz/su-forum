@@ -8,11 +8,14 @@ import { IUser } from '../interfaces/user';
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private httpClient: HttpClient) {}
 
   getUserProfile(): Observable<IUser> {
-    return this.http.get<IUser>('http://localhost:5000/api/v1/users/profile', {
-      withCredentials: true,
-    });
+    return this.httpClient.get<IUser>(
+      'http://localhost:5000/api/v1/users/profile',
+      {
+        withCredentials: true,
+      }
+    );
   }
 }
