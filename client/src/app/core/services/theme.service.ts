@@ -28,7 +28,7 @@ export class ThemeService {
     );
   }
 
-  addTheme(themeData: IThemeDto): Observable<ITheme> {
+  addTheme$(themeData: IThemeDto): Observable<ITheme> {
     return this.httpClient.post<ITheme>(
       `${apiUrl}${endpoints.themes}`,
       themeData,

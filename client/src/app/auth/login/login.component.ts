@@ -37,7 +37,7 @@ export class LoginComponent {
       password: this.loginFormGroup.value.password,
     };
 
-    this.authService.login(body).subscribe({
+    this.authService.login$(body).subscribe({
       next: (user) => {
         this.authService.user = user;
         this.authService.isLoggedIn = true;

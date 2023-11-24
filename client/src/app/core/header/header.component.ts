@@ -21,7 +21,7 @@ export class HeaderComponent {
 
   handleLogout($event: MouseEvent): void {
     $event.preventDefault();
-    this.authService.logout().subscribe({
+    this.authService.logout$().subscribe({
       next: () => {
         this.authService.isLoggedIn = false;
         this.authService.user = null;

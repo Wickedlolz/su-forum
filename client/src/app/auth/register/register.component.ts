@@ -57,7 +57,7 @@ export class RegisterComponent {
       password: this.registerFormGroup.value.passwords.password,
     };
 
-    this.authService.register(body).subscribe({
+    this.authService.register$(body).subscribe({
       next: (user) => {
         this.authService.user = user;
         this.authService.isLoggedIn = true;

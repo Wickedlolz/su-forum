@@ -22,7 +22,7 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) {}
 
-  login(userData: IUserLoginDto): Observable<IUser> {
+  login$(userData: IUserLoginDto): Observable<IUser> {
     return this.httpClient.post<IUser>(
       `${apiUrl}${endpoints.login}`,
       userData,
@@ -32,7 +32,7 @@ export class AuthService {
     );
   }
 
-  register(userData: IUserRegisterDto): Observable<IUser> {
+  register$(userData: IUserRegisterDto): Observable<IUser> {
     return this.httpClient.post<IUser>(
       `${apiUrl}${endpoints.register}`,
       userData,
@@ -42,13 +42,13 @@ export class AuthService {
     );
   }
 
-  authenticate(): Observable<IUser> {
+  authenticate$(): Observable<IUser> {
     return this.httpClient.get<IUser>(`${apiUrl}${endpoints.profile}`, {
       withCredentials: true,
     });
   }
 
-  logout() {
+  logout$() {
     return this.httpClient.get(`${apiUrl}${endpoints.logout}`, {
       withCredentials: true,
     });
