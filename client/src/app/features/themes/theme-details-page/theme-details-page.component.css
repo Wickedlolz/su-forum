@@ -198,3 +198,9 @@
   font-weight: bold;
   text-align: center;
 }
+
+p.error {
+  border-radius: 0.3em;
+  color: red;
+  padding-top: 0;
+}
