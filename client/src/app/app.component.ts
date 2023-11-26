@@ -9,16 +9,22 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
+  isLoading: boolean = true;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.subscription = this.authService.authenticate$().subscribe({
       next: (user) => {
         this.authService.user = user;
         this.authService.isLoggedIn = true;
+        this.isLoading = false;
       },
-      error: (error) => console.error(error),
+      error: (error) => {
+        console.error(error);
+        this.isLoading = false;
+      },
     });
   }
 
