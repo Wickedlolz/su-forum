@@ -6,7 +6,6 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 import { ITheme } from 'src/app/core/interfaces/theme';
 import { IPost } from 'src/app/core/interfaces/post';
 import { NgForm } from '@angular/forms';
-import { PostService } from 'src/app/core/services/post.service';
 
 @Component({
   selector: 'app-theme-details-page',
@@ -18,6 +17,10 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
   subscription!: Subscription;
 
+  get currentUser() {
+    return this.authService.user;
+  }
+
   get canSubscribe() {
     return !this.theme.subscribers.includes(this.authService.user?._id || '');
   }
@@ -28,7 +31,6 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private themeService: ThemeService,
-    private postService: PostService,
     private authService: AuthService,
     private activatedRoute: ActivatedRoute
   ) {}
@@ -58,8 +60,18 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  handlePost(postForm: NgForm): void {
-    console.log(postForm.value);
+  handleAddPost(postForm: NgForm): void {
+    const themeId = this.activatedRoute.snapshot.params['themeId'];
+
+    this.themeService.addPost$(themeId, postForm.value).subscribe({
+      next: (updatedTheme) => {
+        this.theme = updatedTheme;
+        postForm.resetForm();
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
 
   canLike(comment: IPost): boolean {

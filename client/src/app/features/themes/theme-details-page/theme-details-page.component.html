@@ -50,9 +50,11 @@
       </div>
     </div>
     <div class="answer-comment" *ngIf="isLogged">
-      <p><span>currentUser</span> comment:</p>
+      <p>
+        <span>{{ currentUser?.username }}</span> comment:
+      </p>
       <div class="answer">
-        <form #postForm="ngForm" (ngSubmit)="handlePost(postForm)">
+        <form #postForm="ngForm" (ngSubmit)="handleAddPost(postForm)">
           <textarea
             name="postText"
             #postText="ngModel"

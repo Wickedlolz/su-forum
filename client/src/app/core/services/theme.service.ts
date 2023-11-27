@@ -37,4 +37,12 @@ export class ThemeService {
       }
     );
   }
+
+  addPost$(themeId: string, postDto: any) {
+    return this.httpClient.post<ITheme<IPost>>(
+      `${apiUrl}${endpoints.themeById(themeId)}`,
+      postDto,
+      { withCredentials: true }
+    );
+  }
 }
