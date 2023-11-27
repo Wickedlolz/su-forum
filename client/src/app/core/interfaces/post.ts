@@ -11,3 +11,7 @@ export interface IPost {
   updatedAt: string;
   __v: number;
 }
+
+export interface IPostDto {
+  postText: string;
+}

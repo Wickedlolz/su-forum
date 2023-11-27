@@ -4,7 +4,7 @@ import { Subscription, switchMap, tap } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
 import { ITheme } from 'src/app/core/interfaces/theme';
-import { IPost } from 'src/app/core/interfaces/post';
+import { IPost, IPostDto } from 'src/app/core/interfaces/post';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -63,7 +63,11 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
   handleAddPost(postForm: NgForm): void {
     const themeId = this.activatedRoute.snapshot.params['themeId'];
 
-    this.themeService.addPost$(themeId, postForm.value).subscribe({
+    const body: IPostDto = {
+      postText: postForm.value.postText as string,
+    };
+
+    this.themeService.addPost$(themeId, body).subscribe({
       next: (updatedTheme) => {
         this.theme = updatedTheme;
         postForm.resetForm();
