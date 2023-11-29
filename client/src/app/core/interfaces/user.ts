@@ -11,6 +11,12 @@ export interface IUser {
   __v: number;
 }
 
+export interface IUserUpdateDto {
+  tel: string;
+  email: string;
+  username: string;
+}
+
 export interface IUserLoginDto {
   email: string;
   password: string;

@@ -1,8 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { IUser } from '../interfaces/user';
+import { IUser, IUserUpdateDto } from '../interfaces/user';
+import { environment } from 'src/environments/environment';
+
+const apiUrl = environment.apiUrl;
+
+const endpoints = {
+  userProfile: '/users/profile',
+};
 
 @Injectable({
   providedIn: 'root',
@@ -11,11 +17,16 @@ export class UserService {
   constructor(private httpClient: HttpClient) {}
 
   getUserProfile(): Observable<IUser> {
-    return this.httpClient.get<IUser>(
-      'http://localhost:5000/api/v1/users/profile',
-      {
-        withCredentials: true,
-      }
+    return this.httpClient.get<IUser>(`${apiUrl}${endpoints.userProfile}`, {
+      withCredentials: true,
+    });
+  }
+
+  updateUserProfile$(userDto: IUserUpdateDto): Observable<IUser> {
+    return this.httpClient.put<IUser>(
+      `${apiUrl}${endpoints.userProfile}`,
+      userDto,
+      { withCredentials: true }
     );
   }
 }
