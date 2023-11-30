@@ -40,7 +40,6 @@ export class LoginComponent {
     this.authService.login$(body).subscribe({
       next: (user) => {
         this.authService.user = user;
-        this.authService.isLoggedIn = true;
         this.router.navigate(['/home']);
       },
       error: (error) => console.error(error),

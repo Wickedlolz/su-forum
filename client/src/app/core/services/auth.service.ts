@@ -17,8 +17,11 @@ const endpoints = {
   providedIn: 'root',
 })
 export class AuthService {
-  isLoggedIn: boolean = false;
   user: IUser | null = null;
+
+  get isLoggedIn() {
+    return !!this.user;
+  }
 
   constructor(private httpClient: HttpClient) {}
 

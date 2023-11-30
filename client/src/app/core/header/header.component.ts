@@ -23,7 +23,6 @@ export class HeaderComponent {
     $event.preventDefault();
     this.authService.logout$().subscribe({
       next: () => {
-        this.authService.isLoggedIn = false;
         this.authService.user = null;
         this.router.navigate(['/home']);
       },
