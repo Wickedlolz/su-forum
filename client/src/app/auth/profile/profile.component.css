@@ -63,6 +63,10 @@
   padding: 0.17em 0;
 }
 
+.flex .edit-tel {
+  display: flex;
+}
+
 .red-button {
   background-color: red;
 }
