@@ -15,6 +15,8 @@ import { emailValidator } from '../utils';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+  errorMessage: string = '';
+
   loginFormGroup: FormGroup = this.formBuilder.group({
     email: new FormControl('', [Validators.required, emailValidator]),
     password: new FormControl(null, [
@@ -30,6 +32,7 @@ export class LoginComponent {
   ) {}
 
   handleLogin(): void {
+    this.errorMessage = '';
     if (this.loginFormGroup.invalid) return;
 
     const body = {
@@ -42,7 +45,9 @@ export class LoginComponent {
         this.authService.user = user;
         this.router.navigate(['/home']);
       },
-      error: (error) => console.error(error),
+      error: (err) => {
+        this.errorMessage = err.error.error.message;
+      },
     });
   }
 }
