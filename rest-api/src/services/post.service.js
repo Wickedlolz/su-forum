@@ -57,11 +57,16 @@ export const deletePost = async (postId, themeId, userId) => {
 };
 
 export const likePost = async (postId, userId) => {
-    const likedPost = await Post.updateOne(
-        { _id: postId },
-        { $addToSet: { likes: userId } },
-        { new: true }
-    );
+    const post = await Post.findById(postId);
+    const isLiked = post.likes.includes(userId);
 
-    return likedPost;
+    if (isLiked) {
+        post.likes.pull(userId);
+    } else {
+        post.likes.push(userId);
+    }
+
+    await post.save();
+
+    return post.populate('userId');
 };
