@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, switchMap, tap } from 'rxjs';
+import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
 import { ITheme } from 'src/app/core/interfaces/theme';
 import { IPost, IPostDto } from 'src/app/core/interfaces/post';
-import { NgForm } from '@angular/forms';
-import { LikesService } from 'src/app/core/services/likes.service';
+import { PostService } from 'src/app/core/services/post.service';
 
 @Component({
   selector: 'app-theme-details-page',
@@ -33,7 +33,7 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
   constructor(
     private themeService: ThemeService,
     private authService: AuthService,
-    private likesService: LikesService,
+    private postService: PostService,
     private activatedRoute: ActivatedRoute
   ) {}
 
@@ -85,7 +85,7 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
   }
 
   handleLikeUnlike(postId: string): void {
-    this.likesService.handleLikeUnlike(postId).subscribe({
+    this.postService.handleLikeUnlike(postId).subscribe({
       next: (updatedPost) => {
         const postIndex = this.theme.posts.findIndex((p) => p._id === postId);
 
