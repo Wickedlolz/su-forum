@@ -6,6 +6,7 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 import { ITheme } from 'src/app/core/interfaces/theme';
 import { IPost, IPostDto } from 'src/app/core/interfaces/post';
 import { NgForm } from '@angular/forms';
+import { LikesService } from 'src/app/core/services/likes.service';
 
 @Component({
   selector: 'app-theme-details-page',
@@ -32,6 +33,7 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
   constructor(
     private themeService: ThemeService,
     private authService: AuthService,
+    private likesService: LikesService,
     private activatedRoute: ActivatedRoute
   ) {}
 
@@ -80,5 +82,18 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
 
   canLike(comment: IPost): boolean {
     return !comment.likes.includes(this.authService.user?._id || '');
+  }
+
+  handleLikeUnlike(postId: string): void {
+    this.likesService.handleLikeUnlike(postId).subscribe({
+      next: (updatedPost) => {
+        const postIndex = this.theme.posts.findIndex((p) => p._id === postId);
+
+        this.theme.posts[postIndex] = updatedPost;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
 }
