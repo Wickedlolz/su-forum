@@ -14,6 +14,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   currentUser!: IUser;
   isLoading: boolean = true;
   isInEditMode: boolean = false;
+  errorMessage: string = '';
 
   @ViewChild('editProfileForm') editProfileForm!: NgForm;
 
@@ -26,13 +27,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.isLoading = true;
+    this.errorMessage = '';
     this.subscription = this.userService.getUserProfile().subscribe({
       next: (user) => {
         this.currentUser = user;
         this.isLoading = false;
       },
-      error: (error) => {
-        console.error(error);
+      error: (err) => {
+        this.errorMessage = err.error.error.message;
       },
     });
   }
@@ -52,6 +54,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   handleUpdateProfile(): void {
+    this.errorMessage = '';
     if (this.editProfileForm.invalid) return;
 
     const userDto = {
@@ -66,8 +69,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.authService.user = user;
         this.changeProfileMode();
       },
-      error: (error) => {
-        console.log(error);
+      error: (err) => {
+        this.errorMessage = err.error.error.message;
       },
     });
   }

@@ -16,6 +16,8 @@ import { emailValidator, passwordMatch } from '../utils';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
+  errorMessage: string = '';
+
   passwordControl = new FormControl(null, [
     Validators.required,
     Validators.minLength(5),
@@ -48,6 +50,7 @@ export class RegisterComponent {
   ) {}
 
   handleRegister(): void {
+    this.errorMessage = '';
     if (this.registerFormGroup.invalid) return;
 
     const body: IUserRegisterDto = {
@@ -62,7 +65,9 @@ export class RegisterComponent {
         this.authService.user = user;
         this.router.navigate(['/home']);
       },
-      error: (error) => console.error(error),
+      error: (err) => {
+        this.errorMessage = err.error.error.message;
+      },
     });
   }
 }

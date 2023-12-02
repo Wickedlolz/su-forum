@@ -9,14 +9,19 @@ import { ThemeService } from 'src/app/core/services/theme.service';
   styleUrls: ['./theme-new-page.component.css'],
 })
 export class ThemeNewPageComponent {
+  errorMessage: string = '';
+
   constructor(private router: Router, private themeService: ThemeService) {}
 
   handleAddNewTheme(newThemeForm: NgForm): void {
+    this.errorMessage = '';
     this.themeService.addTheme$(newThemeForm.value).subscribe({
       next: (newTheme) => {
         this.router.navigate(['/themes']);
       },
-      error: (error) => console.error(error),
+      error: (err) => {
+        this.errorMessage = err.error.error.message;
+      },
     });
   }
 

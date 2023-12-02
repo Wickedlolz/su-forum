@@ -3,6 +3,7 @@
     <div class="header-background">
       <span>New Theme</span>
     </div>
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
     <form #newThemeForm="ngForm" (ngSubmit)="handleAddNewTheme(newThemeForm)">
       <div class="new-theme-title">
         <label for="themeName">Title <span class="red">*</span></label>

@@ -8,7 +8,7 @@ const apiUrl = environment.apiUrl;
 
 const endpoints = {
   posts: (limit?: number) => `/posts${limit ? '?limit=' + limit : ''}`,
-  likeUnlike: (postId: string) => `/likes/${postId}`,
+  like: (postId: string) => `/likes/${postId}`,
 };
 
 @Injectable({
@@ -23,7 +23,7 @@ export class PostService {
 
   handleLikeUnlike(postId: string): Observable<IPost> {
     return this.httpClient.put<IPost>(
-      `${apiUrl}${endpoints.likeUnlike(postId)}`,
+      `${apiUrl}${endpoints.like(postId)}`,
       {},
       { withCredentials: true }
     );

@@ -24,6 +24,7 @@
   <div class="profile" *ngIf="!isLoading && isInEditMode">
     <img src="/assets/profile.png" alt="default user" />
     <h3>User Info:</h3>
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
     <form #editProfileForm="ngForm" (ngSubmit)="handleUpdateProfile()">
       <div class="flex">
         <p>Username:</p>

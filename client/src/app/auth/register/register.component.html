@@ -8,6 +8,8 @@
     <fieldset>
       <h2>Registration Form</h2>
 
+      <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+
       <!-- username -->
       <p class="field field-icon">
         <label for="username"
