@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription, map, switchMap, tap } from 'rxjs';
+import { Subscription, map, switchMap, tap } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
@@ -27,7 +27,6 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
         return !this.theme.subscribers.includes(user?._id || '');
       })
     );
-    // return !this.theme.subscribers.includes(this.authService.user?._id || '');
   }
 
   constructor(
