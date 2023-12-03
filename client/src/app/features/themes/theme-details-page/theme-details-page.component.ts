@@ -24,7 +24,7 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
   get canSubscribe() {
     return this.currentUser$.pipe(
       map((user) => {
-        return this.theme.subscribers.includes(user?._id || '');
+        return !this.theme.subscribers.includes(user?._id || '');
       })
     );
     // return !this.theme.subscribers.includes(this.authService.user?._id || '');
@@ -80,13 +80,12 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  canLike(comment: IPost): Observable<boolean> {
+  canLike(comment: IPost) {
     return this.currentUser$.pipe(
       map((user) => {
-        return comment.likes.includes(user?._id || '');
+        return !comment.likes.includes(user?._id || '');
       })
     );
-    // return !comment.likes.includes(this.authService.user?._id || '');
   }
 
   handleLikeUnlike(postId: string): void {

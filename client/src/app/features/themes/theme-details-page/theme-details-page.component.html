@@ -15,13 +15,13 @@
             Subscribers: <span>{{ theme.subscribers.length }}</span>
           </p>
           <button
-            *ngIf="(isLoggedIn$ | async) && canSubscribe"
+            *ngIf="(isLoggedIn$ | async) && (canSubscribe | async)"
             class="subscribe"
           >
             Subscribe
           </button>
           <button
-            *ngIf="(isLoggedIn$ | async) && !canSubscribe"
+            *ngIf="(isLoggedIn$ | async) && !(canSubscribe | async)"
             class="unsubscribe"
           >
             Unsubscribe
@@ -49,12 +49,12 @@
       </div>
       <div class="footer">
         <i
-          *ngIf="(isLoggedIn$ | async) && canLike(comment)"
+          *ngIf="(isLoggedIn$ | async) && (canLike(comment) | async)"
           (click)="handleLikeUnlike(comment._id)"
           class="fas fa-thumbs-up"
         ></i>
         <i
-          *ngIf="(isLoggedIn$ | async) && !canLike(comment)"
+          *ngIf="(isLoggedIn$ | async) && !(canLike(comment) | async)"
           (click)="handleLikeUnlike(comment._id)"
           class="fas fa-thumbs-down"
         ></i>
