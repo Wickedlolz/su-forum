@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.isLoading = true;
     this.errorMessage = '';
-    this.subscription = this.userService.getUserProfile().subscribe({
+    this.subscription = this.userService.getUserProfile$().subscribe({
       next: (user) => {
         this.currentUser = user;
         this.isLoading = false;

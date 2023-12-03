@@ -16,7 +16,7 @@ const endpoints = {
 export class UserService {
   constructor(private httpClient: HttpClient) {}
 
-  getUserProfile(): Observable<IUser> {
+  getUserProfile$(): Observable<IUser> {
     return this.httpClient.get<IUser>(`${apiUrl}${endpoints.userProfile}`, {
       withCredentials: true,
     });
