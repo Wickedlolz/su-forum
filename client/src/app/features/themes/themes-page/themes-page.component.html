@@ -1,6 +1,6 @@
 <div class="container">
   <main>
-    <app-welcome *ngIf="!isLoggedIn"></app-welcome>
+    <app-welcome *ngIf="!(isLoggedIn$ | async)"></app-welcome>
     <app-theme-list></app-theme-list>
   </main>
   <aside>

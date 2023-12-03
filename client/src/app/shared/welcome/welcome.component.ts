@@ -7,9 +7,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
   styleUrls: ['./welcome.component.css'],
 })
 export class WelcomeComponent {
-  get isLogged(): boolean {
-    return this.authService.isLoggedIn;
-  }
+  isLoggedIn$ = this.authService.isLoggedIn$;
 
   constructor(private authService: AuthService) {}
 }

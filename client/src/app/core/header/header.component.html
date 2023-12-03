@@ -5,16 +5,18 @@
     </div>
     <div class="mini-navbar">
       <ul>
-        <li *ngIf="isLogged">
-          <a routerLink="/user/profile">{{ user?.username }}'s profile</a>
+        <li *ngIf="isLoggedIn$ | async">
+          <a routerLink="/user/profile"
+            >{{ (currentUser$ | async)?.username }}'s profile</a
+          >
         </li>
-        <li *ngIf="isLogged">
+        <li *ngIf="isLoggedIn$ | async">
           <a href="javascript:void(0)" (click)="handleLogout($event)">Logout</a>
         </li>
-        <li *ngIf="!isLogged">
+        <li *ngIf="!(isLoggedIn$ | async)">
           <a routerLink="/user/login">Login</a>
         </li>
-        <li *ngIf="!isLogged">
+        <li *ngIf="!(isLoggedIn$ | async)">
           <a routerLink="/user/register">Register</a>
         </li>
       </ul>
@@ -28,7 +30,7 @@
       <li>
         <a routerLink="/themes">Themes</a>
       </li>
-      <li *ngIf="isLogged">
+      <li *ngIf="isLoggedIn$ | async">
         <a routerLink="/themes/new">New Theme</a>
       </li>
     </ul>

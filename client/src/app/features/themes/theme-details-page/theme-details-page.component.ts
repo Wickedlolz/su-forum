@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription, switchMap, tap } from 'rxjs';
+import { Observable, Subscription, map, switchMap, tap } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
@@ -17,17 +17,17 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
   theme!: ITheme<IPost>;
   isLoading: boolean = true;
   subscription!: Subscription;
+  isLoggedIn$ = this.authService.isLoggedIn$;
 
-  get currentUser() {
-    return this.authService.user;
-  }
+  currentUser$ = this.authService.currentUser$;
 
   get canSubscribe() {
-    return !this.theme.subscribers.includes(this.authService.user?._id || '');
-  }
-
-  get isLogged(): boolean {
-    return this.authService.isLoggedIn;
+    return this.currentUser$.pipe(
+      map((user) => {
+        return this.theme.subscribers.includes(user?._id || '');
+      })
+    );
+    // return !this.theme.subscribers.includes(this.authService.user?._id || '');
   }
 
   constructor(
@@ -80,8 +80,13 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  canLike(comment: IPost): boolean {
-    return !comment.likes.includes(this.authService.user?._id || '');
+  canLike(comment: IPost): Observable<boolean> {
+    return this.currentUser$.pipe(
+      map((user) => {
+        return comment.likes.includes(user?._id || '');
+      })
+    );
+    // return !comment.likes.includes(this.authService.user?._id || '');
   }
 
   handleLikeUnlike(postId: string): void {

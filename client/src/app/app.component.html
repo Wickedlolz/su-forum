@@ -1,11 +1,5 @@
 <app-header></app-header>
 
-<ng-container *ngIf="isLoading">
-  <app-loader></app-loader>
-</ng-container>
-
-<ng-container *ngIf="!isLoading">
-  <router-outlet></router-outlet>
-</ng-container>
+<router-outlet></router-outlet>
 
 <app-footer></app-footer>

@@ -9,13 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-  get user(): IUser | null {
-    return this.authService.user;
-  }
-
-  get isLogged(): boolean {
-    return this.authService.isLoggedIn;
-  }
+  currentUser$ = this.authService.currentUser$;
+  isLoggedIn$ = this.authService.isLoggedIn$;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -23,7 +18,6 @@ export class HeaderComponent {
     $event.preventDefault();
     this.authService.logout$().subscribe({
       next: () => {
-        this.authService.user = null;
         this.router.navigate(['/home']);
       },
       error: (err) => {

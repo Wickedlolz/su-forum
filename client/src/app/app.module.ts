@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -9,6 +9,7 @@ import { ThemesModule } from './features/themes/themes.module';
 import { SharedModule } from './shared/shared.module';
 import { PagesModule } from './features/pages/pages.module';
 import { AuthModule } from './auth/auth.module';
+import { AuthService } from './core/services/auth.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,16 @@ import { AuthModule } from './auth/auth.module';
     SharedModule,
     PagesModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (authService: AuthService) => {
+        return () => authService.authenticate$();
+      },
+      deps: [AuthService],
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

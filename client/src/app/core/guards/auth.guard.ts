@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, UrlTree } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { Observable, map, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,11 +9,16 @@ import { AuthService } from '../services/auth.service';
 export class AuthGuard {
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(): boolean | UrlTree {
-    if (this.authService.isLoggedIn) {
-      return true;
-    }
+  canActivate(): Observable<boolean | UrlTree> {
+    return this.authService.isLoggedIn$.pipe(
+      take(1),
+      map((isLoggedIn) => {
+        if (isLoggedIn) {
+          return true;
+        }
 
-    return this.router.createUrlTree(['/user/login']);
+        return this.router.createUrlTree(['/user/login']);
+      })
+    );
   }
 }

@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ITheme } from 'src/app/core/interfaces/theme';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-theme-item',
@@ -9,13 +10,15 @@ import { ITheme } from 'src/app/core/interfaces/theme';
 })
 export class ThemeItemComponent {
   @Input() theme!: ITheme;
+  isLoggedIn$ = this.authService.isLoggedIn$;
 
-  get canSubscribe(): boolean {
-    return !this.theme.subscribers.includes(this.authService.user!._id);
-  }
-
-  get isLoggedIn(): boolean {
-    return this.authService.isLoggedIn;
+  get canSubscribe(): Observable<boolean> {
+    return this.authService.currentUser$.pipe(
+      map((user) => {
+        return !this.theme.subscribers.includes(user?._id || '');
+      })
+    );
+    // return !this.theme.subscribers.includes(this.authService.user!._id);
   }
 
   constructor(private readonly authService: AuthService) {}

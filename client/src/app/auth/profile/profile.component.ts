@@ -66,7 +66,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.userService.updateUserProfile$(userDto).subscribe({
       next: (user) => {
         this.currentUser = user;
-        this.authService.user = user;
         this.changeProfileMode();
       },
       error: (err) => {

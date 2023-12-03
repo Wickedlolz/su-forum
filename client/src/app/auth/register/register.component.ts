@@ -62,7 +62,6 @@ export class RegisterComponent {
 
     this.authService.register$(body).subscribe({
       next: (user) => {
-        this.authService.user = user;
         this.router.navigate(['/home']);
       },
       error: (err) => {
