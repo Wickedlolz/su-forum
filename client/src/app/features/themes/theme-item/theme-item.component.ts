@@ -18,7 +18,6 @@ export class ThemeItemComponent {
         return !this.theme.subscribers.includes(user?._id || '');
       })
     );
-    // return !this.theme.subscribers.includes(this.authService.user!._id);
   }
 
   constructor(private readonly authService: AuthService) {}
