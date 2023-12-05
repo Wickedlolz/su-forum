@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription, map, switchMap, tap } from 'rxjs';
+import { Subscription, map, switchMap, take, tap } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
@@ -23,6 +23,7 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
 
   get canSubscribe() {
     return this.currentUser$.pipe(
+      take(1),
       map((user) => {
         return !this.theme.subscribers.includes(user?._id || '');
       })
@@ -81,6 +82,7 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
 
   canLike(comment: IPost) {
     return this.currentUser$.pipe(
+      take(1),
       map((user) => {
         return !comment.likes.includes(user?._id || '');
       })
