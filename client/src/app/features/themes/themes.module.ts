@@ -20,6 +20,6 @@ import { FormsModule } from '@angular/forms';
     ThemeNewPageComponent,
   ],
   imports: [CommonModule, ThemesRoutingModule, SharedModule, FormsModule],
-  exports: [AsideComponent, ThemeListComponent],
+  exports: [],
 })
 export class ThemesModule {}
