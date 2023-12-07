@@ -1,31 +1,31 @@
-import { Schema, model, Types } from "mongoose";
+import { Schema, model, Types } from 'mongoose';
 
 const themeSchema = new Schema(
-  {
-    themeName: {
-      type: String,
-      required: true,
+    {
+        themeName: {
+            type: String,
+            required: true,
+        },
+        subscribers: [
+            {
+                type: Types.ObjectId,
+                ref: 'User',
+            },
+        ],
+        userId: {
+            type: Types.ObjectId,
+            ref: 'User',
+        },
+        posts: [
+            {
+                type: Types.ObjectId,
+                ref: 'Post',
+            },
+        ],
     },
-    subscribers: [
-      {
-        type: Types.ObjectId,
-        ref: "User",
-      },
-    ],
-    userId: {
-      type: Types.ObjectId,
-      ref: "User",
-    },
-    posts: [
-      {
-        type: Types.ObjectId,
-        ref: "Post",
-      },
-    ],
-  },
-  { timestamps: true }
+    { timestamps: true }
 );
 
-const Theme = model("Theme", themeSchema);
+const Theme = model('Theme', themeSchema);
 
 export default Theme;

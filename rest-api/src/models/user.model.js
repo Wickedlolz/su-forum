@@ -1,69 +1,69 @@
-import { Schema, model, Types } from "mongoose";
+import { Schema, model, Types } from 'mongoose';
 
 const userSchema = new Schema(
-  {
-    tel: {
-      type: String,
-    },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    username: {
-      type: String,
-      required: true,
-      unique: true,
-      minlength: [5, "Username should be at least 5 characters"],
-      validate: {
-        validator: function (v) {
-          return /[a-zA-Z0-9]+/g.test(v);
+    {
+        tel: {
+            type: String,
         },
-        message: (props) =>
-          `${props.value} must contains only latin letters and digits!`,
-      },
-    },
-    password: {
-      type: String,
-      required: true,
-      minlength: [5, "Password should be at least 5 characters"],
-      validate: {
-        validator: function (v) {
-          return /[a-zA-Z0-9]+/g.test(v);
+        email: {
+            type: String,
+            required: true,
+            unique: true,
         },
-        message: (props) =>
-          `${props.value} must contains only latin letters and digits!`,
-      },
+        username: {
+            type: String,
+            required: true,
+            unique: true,
+            minlength: [5, 'Username should be at least 5 characters'],
+            validate: {
+                validator: function (v) {
+                    return /[a-zA-Z0-9]+/g.test(v);
+                },
+                message: (props) =>
+                    `${props.value} must contains only latin letters and digits!`,
+            },
+        },
+        password: {
+            type: String,
+            required: true,
+            minlength: [5, 'Password should be at least 5 characters'],
+            validate: {
+                validator: function (v) {
+                    return /[a-zA-Z0-9]+/g.test(v);
+                },
+                message: (props) =>
+                    `${props.value} must contains only latin letters and digits!`,
+            },
+        },
+        themes: [
+            {
+                type: Types.ObjectId,
+                ref: 'Theme',
+            },
+        ],
+        posts: [
+            {
+                type: Types.ObjectId,
+                ref: 'Post',
+            },
+        ],
     },
-    themes: [
-      {
-        type: Types.ObjectId,
-        ref: "Theme",
-      },
-    ],
-    posts: [
-      {
-        type: Types.ObjectId,
-        ref: "Post",
-      },
-    ],
-  },
-  { timestamps: true }
+    { timestamps: true }
 );
 
 userSchema.index(
-  {
-    email: 1,
-  },
-  {
-    unique: true,
-    collation: {
-      locale: "en",
-      strength: 2,
+    {
+        email: 1,
     },
-  }
+    {
+        unique: true,
+        collation: {
+            locale: 'en',
+            strength: 2,
+        },
+    }
 );
 
-const User = model("User", userSchema);
+const User = model('User', userSchema);
 
 export default User;

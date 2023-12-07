@@ -1,6 +1,6 @@
-import User from "../models/user.model.js";
-import jwt from "jsonwebtoken";
-import { hash, compare } from "bcrypt";
+import User from '../models/user.model.js';
+import jwt from 'jsonwebtoken';
+import { hash, compare } from 'bcrypt';
 
 /**
  * Registers a new user with the provided information, including telephone number, email,
@@ -15,26 +15,29 @@ import { hash, compare } from "bcrypt";
  * @throws {Object} An error object with a message property if registration fails.
  */
 export const register = async (tel, email, username, password) => {
-  const existing = await getUserByEmail(email);
+    const existing = await getUserByEmail(email);
 
-  if (existing) {
-    throw { message: "Email is taken" };
-  }
+    if (existing) {
+        throw { message: 'Email is taken' };
+    }
 
-  const hashedPassword = await hash(password, Number(process.env.SALT_ROUNDS));
+    const hashedPassword = await hash(
+        password,
+        Number(process.env.SALT_ROUNDS)
+    );
 
-  const user = new User({
-    tel,
-    email,
-    username,
-    password: hashedPassword,
-  });
+    const user = new User({
+        tel,
+        email,
+        username,
+        password: hashedPassword,
+    });
 
-  await user.save();
+    await user.save();
 
-  const result = bsonToJson(user);
+    const result = bsonToJson(user);
 
-  return removePassword(result);
+    return removePassword(result);
 };
 
 /**
@@ -46,21 +49,21 @@ export const register = async (tel, email, username, password) => {
  * @throws {Object} An error object with a message property if authentication fails.
  */
 export const login = async (email, password) => {
-  const user = await getUserByEmail(email);
+    const user = await getUserByEmail(email);
 
-  if (!user) {
-    throw { message: "Incorect email or password!" };
-  }
+    if (!user) {
+        throw { message: 'Incorect email or password!' };
+    }
 
-  const isIdentical = await compare(password, user.password);
+    const isIdentical = await compare(password, user.password);
 
-  if (!isIdentical) {
-    throw { message: "Incorect email or password!" };
-  }
+    if (!isIdentical) {
+        throw { message: 'Incorect email or password!' };
+    }
 
-  const result = bsonToJson(user);
+    const result = bsonToJson(user);
 
-  return removePassword(result);
+    return removePassword(result);
 };
 
 /**
@@ -71,28 +74,28 @@ export const login = async (email, password) => {
  * @throws {Error} - If there is an issue during JWT creation.
  */
 export const createToken = (user) => {
-  const tokenPromise = new Promise((resolve, reject) => {
-    const payload = {
-      username: user.username,
-      email: user.email,
-      _id: user._id,
-    };
+    const tokenPromise = new Promise((resolve, reject) => {
+        const payload = {
+            username: user.username,
+            email: user.email,
+            _id: user._id,
+        };
 
-    jwt.sign(
-      payload,
-      process.env.JWT_SECRET,
-      { expiresIn: "2d" },
-      (error, token) => {
-        if (error) {
-          return reject(error);
-        }
+        jwt.sign(
+            payload,
+            process.env.JWT_SECRET,
+            { expiresIn: '2d' },
+            (error, token) => {
+                if (error) {
+                    return reject(error);
+                }
 
-        resolve(token);
-      }
-    );
-  });
+                resolve(token);
+            }
+        );
+    });
 
-  return tokenPromise;
+    return tokenPromise;
 };
 
 /**
@@ -103,13 +106,13 @@ export const createToken = (user) => {
  * @throws {Error} - If the token is invalid or an error occurs during verification.
  */
 export const validateToken = (token) => {
-  return jwt.verify(token, process.env.JWT_SECRET, function (error, decoded) {
-    if (error) {
-      throw new Error(error.message);
-    }
+    return jwt.verify(token, process.env.JWT_SECRET, function (error, decoded) {
+        if (error) {
+            throw new Error(error.message);
+        }
 
-    return decoded;
-  });
+        return decoded;
+    });
 };
 
 /**
@@ -121,8 +124,8 @@ export const validateToken = (token) => {
  * @throws {Error} If an error occurs during the database query.
  */
 const getUserByEmail = async (email) => {
-  const user = await User.findOne({ email: new RegExp(`^${email}$`, "i") });
-  return user;
+    const user = await User.findOne({ email: new RegExp(`^${email}$`, 'i') });
+    return user;
 };
 
 /**
@@ -132,8 +135,8 @@ const getUserByEmail = async (email) => {
  * @returns {Object} A new object with sensitive information (password and version number) removed.
  */
 const removePassword = (data) => {
-  const { password, __v, ...userData } = data;
-  return userData;
+    const { password, __v, ...userData } = data;
+    return userData;
 };
 
 /**
@@ -143,5 +146,5 @@ const removePassword = (data) => {
  * @returns {Object} A new object representing the JSON equivalent of the input BSON data.
  */
 const bsonToJson = (data) => {
-  return JSON.parse(JSON.stringify(data));
+    return JSON.parse(JSON.stringify(data));
 };
