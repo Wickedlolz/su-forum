@@ -20,6 +20,16 @@
           <a routerLink="/user/register">Register</a>
         </li>
       </ul>
+      <p
+        *ngIf="!!isMessageError"
+        [ngClass]="{
+          'error-message': isMessageError,
+          'success-message': !isMessageError
+        }"
+        class="notification"
+      >
+        {{ message }}
+      </p>
     </div>
   </div>
   <nav>
