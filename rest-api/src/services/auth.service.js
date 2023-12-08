@@ -67,6 +67,13 @@ export const login = async (email, password) => {
     return removePassword(result);
 };
 
+/**
+ * Logs out a user by blacklisting the provided token.
+ *
+ * @param {string} token - The authentication token to be blacklisted.
+ * @returns {Promise<object>} - A Promise that resolves to the newly blacklisted token object.
+ * @throws {Error} - Throws an error if there is an issue with blacklisting the token.
+ */
 export const logout = async (token) => {
     const newToken = new TokenBlacklist({ token });
     await newToken.save();
