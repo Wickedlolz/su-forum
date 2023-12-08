@@ -31,18 +31,21 @@ export class ThemeService {
   addTheme$(themeData: IThemeDto): Observable<ITheme> {
     return this.httpClient.post<ITheme>(
       `${apiUrl}${endpoints.themes}`,
-      themeData,
-      {
-        withCredentials: true,
-      }
+      themeData
     );
   }
 
   addPost$(themeId: string, postDto: IPostDto) {
     return this.httpClient.post<ITheme<IPost>>(
       `${apiUrl}${endpoints.themeById(themeId)}`,
-      postDto,
-      { withCredentials: true }
+      postDto
+    );
+  }
+
+  subscribe$(themeId: string) {
+    return this.httpClient.put<ITheme<IPost>>(
+      `${apiUrl}${endpoints.themeById(themeId)}`,
+      {}
     );
   }
 }

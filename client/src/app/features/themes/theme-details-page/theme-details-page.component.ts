@@ -15,9 +15,10 @@ import { PostService } from 'src/app/core/services/post.service';
 })
 export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
   theme!: ITheme<IPost>;
-  isLoading: boolean = true;
   subscription!: Subscription;
   isLoggedIn$ = this.authService.isLoggedIn$;
+  isLoading: boolean = true;
+  isPending: boolean = false;
 
   currentUser$ = this.authService.currentUser$;
 
@@ -65,6 +66,12 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
   handleAddPost(postForm: NgForm): void {
     const themeId = this.activatedRoute.snapshot.params['themeId'];
 
+    if (this.isPending) {
+      return;
+    }
+
+    this.isPending = true;
+
     const body: IPostDto = {
       postText: postForm.value.postText as string,
     };
@@ -73,9 +80,11 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
       next: (updatedTheme) => {
         this.theme = updatedTheme;
         postForm.resetForm();
+        this.isPending = false;
       },
       error: (error) => {
         console.log(error);
+        this.isPending = false;
       },
     });
   }
@@ -90,14 +99,41 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
   }
 
   handleLikeUnlike(postId: string): void {
+    if (this.isPending) {
+      return;
+    }
+
+    this.isPending = true;
+
     this.postService.handleLikeUnlike(postId).subscribe({
       next: (updatedPost) => {
         const postIndex = this.theme.posts.findIndex((p) => p._id === postId);
 
         this.theme.posts[postIndex] = updatedPost;
+        this.isPending = false;
       },
       error: (error) => {
         console.log(error);
+        this.isPending = false;
+      },
+    });
+  }
+
+  handleSubscribeUnsubscribe(themeId: string) {
+    if (this.isPending) {
+      return;
+    }
+
+    this.isPending = true;
+
+    this.themeService.subscribe$(themeId).subscribe({
+      next: (updatedTheme) => {
+        this.theme = updatedTheme;
+        this.isPending = false;
+      },
+      error: (error) => {
+        console.log(error);
+        this.isPending = false;
       },
     });
   }

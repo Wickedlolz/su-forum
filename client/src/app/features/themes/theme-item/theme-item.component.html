@@ -22,6 +22,7 @@
               subscribe: canSubscribe | async,
               unsubscribe: !(canSubscribe | async)
             }"
+            (click)="handleSubscribeUnsubscribe(theme._id)"
           >
             {{ (canSubscribe | async) ? "Subscribe" : "Unsubscribe" }}
           </button>

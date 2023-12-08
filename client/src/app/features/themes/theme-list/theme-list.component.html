@@ -3,5 +3,9 @@
 </div>
 
 <div class="theme-title" *ngIf="!isLoading">
-  <app-theme-item *ngFor="let theme of themes" [theme]="theme"></app-theme-item>
+  <app-theme-item
+    *ngFor="let theme of themes"
+    [theme]="theme"
+    (newUpdatedThemeEvent)="handleUpdateTheme($event)"
+  ></app-theme-item>
 </div>

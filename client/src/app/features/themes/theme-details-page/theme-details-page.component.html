@@ -17,12 +17,14 @@
           <button
             *ngIf="(isLoggedIn$ | async) && (canSubscribe | async)"
             class="subscribe"
+            (click)="handleSubscribeUnsubscribe(theme._id)"
           >
             Subscribe
           </button>
           <button
             *ngIf="(isLoggedIn$ | async) && !(canSubscribe | async)"
             class="unsubscribe"
+            (click)="handleSubscribeUnsubscribe(theme._id)"
           >
             Unsubscribe
           </button>

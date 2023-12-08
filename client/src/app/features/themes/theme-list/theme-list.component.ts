@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ThemeService } from 'src/app/core/services/theme.service';
 import { ITheme } from 'src/app/core/interfaces/theme';
+import { IPost } from 'src/app/core/interfaces/post';
 
 @Component({
   selector: 'app-theme-list',
@@ -31,5 +32,13 @@ export class ThemeListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  handleUpdateTheme(updatedTheme: ITheme<IPost>) {
+    const themeIndex = this.themes.findIndex((t) => t._id === updatedTheme._id);
+
+    if (themeIndex) {
+      this.themes[themeIndex] = updatedTheme as unknown as ITheme;
+    }
   }
 }
