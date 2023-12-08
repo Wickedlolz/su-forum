@@ -4,7 +4,7 @@ import { createPost } from './post.service.js';
 export const getThemes = async () => {
     const themes = await Theme.find({})
         .sort({ createdAt: -1 })
-        .populate('userId');
+        .populate({ path: 'userId', select: '-password' });
 
     return themes;
 };
@@ -14,6 +14,7 @@ export const getThemeById = async (themeId) => {
         path: 'posts',
         populate: {
             path: 'userId',
+            select: '-password',
         },
     });
 
@@ -31,11 +32,20 @@ export const createTheme = async (themeName, userId, postText) => {
 };
 
 export const subscribe = async (themeId, userId) => {
-    const updatedTheme = await Theme.findByIdAndUpdate(
-        { _id: themeId },
-        { $addToSet: { subscribers: userId } },
-        { new: true }
-    );
+    const theme = await Theme.findById(themeId);
+    const isSubscribed = theme.subscribers.includes(userId);
 
-    return updatedTheme;
+    if (isSubscribed) {
+        theme.subscribers.pull(userId);
+    } else {
+        theme.subscribers.push(userId);
+    }
+
+    await theme.save();
+
+    return theme.populate([
+        'posts',
+        { path: 'posts', populate: { path: 'userId', select: '-password' } },
+        { path: 'userId', select: '-password' },
+    ]);
 };
