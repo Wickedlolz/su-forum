@@ -9,6 +9,8 @@ import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
+import { ErrorHandlerInterceptor } from './error-handler.interceptor';
+import { MessageBusService } from './services/message-bus.service';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
@@ -24,7 +26,13 @@ export class CoreModule {
         ThemeService,
         UserService,
         AuthService,
+        MessageBusService,
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: ErrorHandlerInterceptor,
+          multi: true,
+        },
       ],
     };
   }
