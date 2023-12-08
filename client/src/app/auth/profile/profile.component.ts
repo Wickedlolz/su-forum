@@ -69,7 +69,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.changeProfileMode();
       },
       error: (err) => {
-        this.errorMessage = err.error.error.message;
+        this.errorMessage = err.message;
       },
     });
   }
