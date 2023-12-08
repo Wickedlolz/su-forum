@@ -38,10 +38,18 @@ router.post('/login', async (req, res, next) => {
     }
 });
 
-router.get('/logout', (req, res) => {
-    res.clearCookie(process.env.COOKIE_NAME)
-        .status(204)
-        .json({ message: 'Logged out!' });
+router.get('/logout', async (req, res, next) => {
+    const token = req.cookies[process.env.COOKIE_NAME];
+
+    try {
+        await authService.logout(token);
+
+        res.clearCookie(process.env.COOKIE_NAME)
+            .status(204)
+            .json({ message: 'Logged out!' });
+    } catch (error) {
+        next(error);
+    }
 });
 
 export default router;

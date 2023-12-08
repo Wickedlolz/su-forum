@@ -1,4 +1,5 @@
 import User from '../models/user.model.js';
+import TokenBlacklist from '../models/tokenBlacklist.model.js';
 import jwt from 'jsonwebtoken';
 import { hash, compare } from 'bcrypt';
 
@@ -64,6 +65,13 @@ export const login = async (email, password) => {
     const result = bsonToJson(user);
 
     return removePassword(result);
+};
+
+export const logout = async (token) => {
+    const newToken = new TokenBlacklist({ token });
+    await newToken.save();
+
+    return newToken;
 };
 
 /**
