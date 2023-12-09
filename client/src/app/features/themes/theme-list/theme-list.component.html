@@ -3,9 +3,18 @@
 </div>
 
 <div class="theme-title" *ngIf="!isLoading">
+  <form class="search-form">
+    <input
+      [formControl]="searchControl"
+      type="search"
+      id="search"
+      placeholder="Search for themes..."
+    />
+  </form>
   <app-theme-item
     *ngFor="let theme of themes"
     [theme]="theme"
     (newUpdatedThemeEvent)="handleUpdateTheme($event)"
   ></app-theme-item>
+  <div *ngIf="themes.length === 0">No Themes found!</div>
 </div>

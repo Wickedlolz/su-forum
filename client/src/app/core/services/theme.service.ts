@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ITheme, IThemeDto } from '../interfaces/theme';
@@ -18,8 +18,20 @@ const endpoints = {
 export class ThemeService {
   constructor(private httpClient: HttpClient) {}
 
-  loadThemes$(): Observable<ITheme[]> {
-    return this.httpClient.get<ITheme[]>(`${apiUrl}${endpoints.themes}`);
+  loadThemes$(searchTearm?: string): Observable<ITheme[]> {
+    const options = {
+      title: '',
+    };
+
+    if (searchTearm) {
+      options.title = searchTearm;
+    }
+
+    return this.httpClient.get<ITheme[]>(`${apiUrl}${endpoints.themes}`, {
+      params: new HttpParams({
+        fromObject: options,
+      }),
+    });
   }
 
   loadThemeById$(themeId: string): Observable<ITheme<IPost>> {

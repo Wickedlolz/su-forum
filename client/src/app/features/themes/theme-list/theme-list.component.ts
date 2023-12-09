@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { Subscription, debounceTime, startWith, switchMap, tap } from 'rxjs';
 import { ThemeService } from 'src/app/core/services/theme.service';
 import { ITheme } from 'src/app/core/interfaces/theme';
 import { IPost } from 'src/app/core/interfaces/post';
@@ -14,20 +15,24 @@ export class ThemeListComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
   subscription!: Subscription;
 
+  searchControl = new FormControl('');
+
   constructor(private themeService: ThemeService) {}
 
   ngOnInit(): void {
-    this.isLoading = true;
-    this.subscription = this.themeService.loadThemes$().subscribe({
-      next: (themes) => {
+    this.subscription = this.searchControl.valueChanges
+      .pipe(
+        startWith(''),
+        debounceTime(300),
+        tap(() => {
+          this.isLoading = true;
+        }),
+        switchMap((searchTearm) => this.themeService.loadThemes$(searchTearm!))
+      )
+      .subscribe((themes) => {
         this.themes = themes;
         this.isLoading = false;
-      },
-      error: (error) => {
-        console.error(error);
-        this.isLoading = false;
-      },
-    });
+      });
   }
 
   ngOnDestroy(): void {
