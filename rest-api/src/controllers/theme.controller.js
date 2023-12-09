@@ -5,8 +5,10 @@ import { isAuth } from '../middlewares/guards.middleware.js';
 const router = Router();
 
 router.get('/', async (req, res, next) => {
+    const searchTearm = req.query.title || '';
+
     try {
-        const themes = await themeService.getThemes();
+        const themes = await themeService.getThemes(searchTearm);
 
         res.json(themes);
     } catch (error) {
