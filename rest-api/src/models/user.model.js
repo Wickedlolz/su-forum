@@ -10,6 +10,7 @@ const userSchema = new Schema(
             required: true,
             unique: true,
         },
+        photoURL: String,
         username: {
             type: String,
             required: true,

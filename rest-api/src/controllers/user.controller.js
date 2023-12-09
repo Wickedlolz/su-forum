@@ -18,14 +18,15 @@ router.get('/profile', isAuth(), async (req, res, next) => {
 
 router.put('/profile', isAuth(), async (req, res, next) => {
     const { _id: userId } = req.user;
-    const { tel, username, email } = req.body;
+    const { tel, username, email, photoURL } = req.body;
 
     try {
         const updatedUser = await userService.editProfileInfo(
             userId,
             tel,
             username,
-            email
+            email,
+            photoURL
         );
 
         res.status(201).json(updatedUser);
