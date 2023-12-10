@@ -29,9 +29,15 @@ export class ThemeListComponent implements OnInit, OnDestroy {
         }),
         switchMap((searchTearm) => this.themeService.loadThemes$(searchTearm!))
       )
-      .subscribe((themes) => {
-        this.themes = themes;
-        this.isLoading = false;
+      .subscribe({
+        next: (themes) => {
+          this.themes = themes;
+          this.isLoading = false;
+        },
+        error: (err) => {
+          console.log(err);
+          this.isLoading = false;
+        },
       });
   }
 
