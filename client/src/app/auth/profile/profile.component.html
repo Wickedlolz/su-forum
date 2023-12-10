@@ -22,12 +22,12 @@
   </div>
 
   <div class="profile" *ngIf="!isLoading && isInEditMode">
-    <img src="/assets/profile.png" alt="default user" />
-    <h3>User Info:</h3>
-    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
     <form #editProfileForm="ngForm" (ngSubmit)="handleUpdateProfile()">
+      <img src="/assets/profile.png" alt="default user" />
+      <h3>User Info:</h3>
+      <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
       <div class="flex">
-        <p>Username:</p>
+        <label for="username">Username:</label>
         <input
           type="text"
           name="username"
@@ -39,7 +39,7 @@
         />
       </div>
       <div class="flex">
-        <p>Email:</p>
+        <label for="email">Email:</label>
         <input
           type="email"
           name="email"
@@ -51,7 +51,7 @@
         />
       </div>
       <div class="flex">
-        <p>Phone:</p>
+        <label for="tel">Phone:</label>
         <div class="edit-tel">
           <select name="select-tel" ngModel="00359" id="select-tel" class="tel">
             <option value="00359">+359</option>

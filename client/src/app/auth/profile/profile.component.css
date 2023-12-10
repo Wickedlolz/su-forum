@@ -27,7 +27,8 @@
   display: flex;
 }
 
-.flex p:first-child {
+.flex p:first-child,
+.flex label:first-child {
   width: 35%;
   text-align: right;
   margin: 0.5em;
