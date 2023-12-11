@@ -53,7 +53,7 @@ export const editProfileInfo = async (
 
     const updatedUser = await User.findOneAndUpdate(
         { _id: userId },
-        { tel, username, email, photoURL: uploadedResponse.secure_url },
+        { tel, username, email, photoURL: uploadedResponse?.secure_url },
         { runValidators: true, new: true }
     ).lean();
 
