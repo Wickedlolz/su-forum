@@ -6,6 +6,7 @@ export interface IUser {
   email: string;
   username: string;
   password: string;
+  photoURL?: string;
   created_at: string;
   updatedAt: string;
   __v: number;
@@ -15,6 +16,7 @@ export interface IUserUpdateDto {
   tel: string;
   email: string;
   username: string;
+  photoURL?: string | ArrayBuffer | null;
 }
 
 export interface IUserLoginDto {

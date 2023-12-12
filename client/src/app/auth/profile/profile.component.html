@@ -4,7 +4,10 @@
 
 <div class="container">
   <div class="profile" *ngIf="!isLoading && !isInEditMode">
-    <img src="/assets/profile.png" alt="default user" />
+    <img
+      [src]="currentUser.photoURL || '/assets/profile.png'"
+      alt="default user"
+    />
     <h3>User Info:</h3>
     <div class="flex">
       <p>Username:</p>
@@ -23,7 +26,10 @@
 
   <div class="profile" *ngIf="!isLoading && isInEditMode">
     <form #editProfileForm="ngForm" (ngSubmit)="handleUpdateProfile()">
-      <img src="/assets/profile.png" alt="default user" />
+      <img
+        [src]="currentUser.photoURL || '/assets/profile.png'"
+        alt="default user"
+      />
       <h3>User Info:</h3>
       <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
       <div class="flex">
@@ -64,6 +70,15 @@
             [value]="currentUser.tel"
           />
         </div>
+      </div>
+      <div class="flex">
+        <label for="photoURL">Profile Picture:</label>
+        <input
+          type="file"
+          id="photoURL"
+          accept="image/*"
+          (change)="handleProfilePictureChange($event)"
+        />
       </div>
       <button class="red-button" (click)="changeProfileMode()">Cancel</button>
       <button class="green-button" [disabled]="editProfileForm.invalid">
