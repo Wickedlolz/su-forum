@@ -4,7 +4,7 @@ Let's make our first API request to the REST-api!
 
 In the example below, we're trying to get information about the REST-api:
 
-`https://localhost:3000/api/v1/test`
+`https://localhost:5000/api/v1/test`
 
 Here is the response we get:
 
@@ -31,13 +31,13 @@ The documentation below assumes you are prepending the Base URL to the endpoints
 
 ## Authentication
 
-This API isn't open API. Authentication is required to store and get data. You can use the connected REACT-app to make registration and sign in. This also means that I've limited what you can do. If you find a mistake, then just write an issue.
+This API isn't open API. Authentication is required to store and get data. You can use the connected your app to make registration and sign in. This also means that I've limited what you can do. If you find a mistake, then just write an issue.
 
 # Endpoints: Users
 
-- `/auth/register` -- signing up;
-- `/auth/login` -- signing in;
-- `/auth/logout` -- logging out;
+-   `/auth/register` -- signing up;
+-   `/auth/login` -- signing in;
+-   `/auth/logout` -- logging out;
 
 ## Register User
 
@@ -178,8 +178,8 @@ Content:
 
 # Endpoints: Themes
 
-- `/themes`
-- `/themes/:themeId`
+-   `/themes`
+-   `/themes/:themeId`
 
 ## Get Themes
 
@@ -327,7 +327,7 @@ Content:
 
 # Endpoints: Posts
 
-- `/themes/:themeId/posts/:postId`
+-   `/themes/:themeId/posts/:postId`
 
 ## Edit Post
 
