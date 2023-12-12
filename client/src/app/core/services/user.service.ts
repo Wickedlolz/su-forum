@@ -25,8 +25,7 @@ export class UserService {
   updateUserProfile$(userDto: IUserUpdateDto): Observable<IUser> {
     return this.httpClient.put<IUser>(
       `${apiUrl}${endpoints.userProfile}`,
-      userDto,
-      { withCredentials: true }
+      userDto
     );
   }
 }
