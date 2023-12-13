@@ -22,12 +22,12 @@
           <button
             *ngIf="isLoggedIn$ | async"
             [ngClass]="{
-              subscribe: canSubscribe | async,
-              unsubscribe: !(canSubscribe | async)
+              subscribe: canSubscribe$ | async,
+              unsubscribe: !(canSubscribe$ | async)
             }"
             (click)="handleSubscribeUnsubscribe(theme._id)"
           >
-            {{ (canSubscribe | async) ? "Subscribe" : "Unsubscribe" }}
+            {{ (canSubscribe$ | async) ? "Subscribe" : "Unsubscribe" }}
           </button>
           <p>
             Subscribers: <span>{{ theme.subscribers.length }}</span>
