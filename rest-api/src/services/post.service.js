@@ -32,7 +32,13 @@ export const createPost = async (text, userId, themeId) => {
         { new: true }
     );
 
-    return updatedTheme.populate('posts');
+    return updatedTheme.populate([
+        'posts',
+        {
+            path: 'posts',
+            populate: { path: 'userId', select: '-password' },
+        },
+    ]);
 };
 
 export const editPost = async (text, userId, postId) => {
