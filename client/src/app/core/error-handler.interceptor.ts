@@ -20,7 +20,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((err) => {
         this.messageBus.notifyForMessage({
-          text: err.error?.error?.message || 'Something went wrong!',
+          text: err.error.error.message || 'Something went wrong!',
           type: MessageType.Error,
         });
         return throwError(() => err.error.error);
