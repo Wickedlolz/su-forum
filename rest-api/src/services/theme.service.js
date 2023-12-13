@@ -10,7 +10,11 @@ export const getThemes = async (searchTearm, limit, offset) => {
         .skip(offset)
         .limit(limit);
 
-    return themes;
+    const themesCount = await Theme.find({
+        themeName: { $regex: searchTearm, $options: 'i' },
+    }).countDocuments();
+
+    return { themes, count: themesCount };
 };
 
 export const getThemeById = async (themeId) => {

@@ -10,9 +10,13 @@ router.get('/', async (req, res, next) => {
     const offset = Number(req.query.offset) || 0;
 
     try {
-        const themes = await themeService.getThemes(searchTearm, limit, offset);
+        const { themes, count } = await themeService.getThemes(
+            searchTearm,
+            limit,
+            offset
+        );
 
-        res.json(themes);
+        res.json({ themes, count });
     } catch (error) {
         next(error);
     }
