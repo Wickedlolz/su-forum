@@ -16,5 +16,5 @@
     [theme]="theme"
     (newUpdatedThemeEvent)="handleUpdateTheme($event)"
   ></app-theme-item>
-  <div *ngIf="themes.length === 0">No Themes found!</div>
+  <div *ngIf="themes?.length === 0">No Themes found!</div>
 </div>
