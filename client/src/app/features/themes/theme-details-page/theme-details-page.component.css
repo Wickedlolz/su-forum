@@ -113,12 +113,13 @@
 }
 
 .userdetails img {
-  padding: 0;
+  padding: 2px;
   align-self: center;
   margin: 1em 0;
   width: 5em;
   height: 5em;
   border: 1px solid;
+  object-fit: cover;
 }
 
 .footer {

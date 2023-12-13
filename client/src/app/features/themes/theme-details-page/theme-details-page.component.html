@@ -41,7 +41,10 @@
       </header>
       <div class="comment-main">
         <div class="userdetails">
-          <img src="/assets/profile.png" alt="avatar" />
+          <img
+            [src]="comment.userId.photoURL || '/assets/profile.png'"
+            alt="avatar"
+          />
         </div>
         <div class="post-content">
           <p>
