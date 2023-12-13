@@ -1,12 +1,14 @@
 import Theme from '../models/theme.model.js';
 import { createPost } from './post.service.js';
 
-export const getThemes = async (searchTearm) => {
+export const getThemes = async (searchTearm, limit, offset) => {
     const themes = await Theme.find({
         themeName: { $regex: searchTearm, $options: 'i' },
     })
         .sort({ createdAt: -1 })
-        .populate({ path: 'userId', select: '-password' });
+        .populate({ path: 'userId', select: '-password' })
+        .skip(offset)
+        .limit(limit);
 
     return themes;
 };

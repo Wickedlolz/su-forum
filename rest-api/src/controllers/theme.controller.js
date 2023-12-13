@@ -6,9 +6,11 @@ const router = Router();
 
 router.get('/', async (req, res, next) => {
     const searchTearm = req.query.title || '';
+    const limit = Number(req.query.limit) || Number.MAX_SAFE_INTEGER;
+    const offset = Number(req.query.offset) || 0;
 
     try {
-        const themes = await themeService.getThemes(searchTearm);
+        const themes = await themeService.getThemes(searchTearm, limit, offset);
 
         res.json(themes);
     } catch (error) {
