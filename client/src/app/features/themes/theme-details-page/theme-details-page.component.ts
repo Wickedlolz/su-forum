@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription, map, switchMap, take, tap } from 'rxjs';
+import { Subscription, combineLatest, mergeMap, tap } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
+import { PostService } from 'src/app/core/services/post.service';
 import { ITheme } from 'src/app/core/interfaces/theme';
 import { IPost, IPostDto } from 'src/app/core/interfaces/post';
-import { PostService } from 'src/app/core/services/post.service';
+import { IUser } from 'src/app/core/interfaces/user';
 
 @Component({
   selector: 'app-theme-details-page',
@@ -20,15 +21,10 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
   isPending: boolean = false;
 
-  currentUser$ = this.authService.currentUser$;
+  currentUser?: IUser;
 
   get canSubscribe() {
-    return this.currentUser$.pipe(
-      take(1),
-      map((user) => {
-        return !this.theme.subscribers.includes(user?._id || '');
-      })
-    );
+    return !this.theme.subscribers.includes(this.currentUser?._id || '');
   }
 
   constructor(
@@ -39,24 +35,28 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subscription = this.activatedRoute.params
-      .pipe(
+    this.subscription = combineLatest([
+      this.activatedRoute.params.pipe(
         tap(() => {
           this.isLoading = true;
         }),
-        switchMap((params) => {
-          return this.themeService.loadThemeById$(params['themeId']);
+        mergeMap((params) => {
+          const themeId = params['themeId'];
+          return this.themeService.loadThemeById$(themeId);
         })
-      )
-      .subscribe({
-        next: (theme) => {
-          this.theme = theme;
-          this.isLoading = false;
-        },
-        error: (error) => {
-          console.error(error);
-        },
-      });
+      ),
+      this.authService.currentUser$,
+    ]).subscribe({
+      next: ([theme, user]) => {
+        this.theme = theme;
+        this.currentUser = user;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.log(err);
+        this.isLoading = false;
+      },
+    });
   }
 
   ngOnDestroy(): void {
@@ -90,12 +90,7 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
   }
 
   canLike(comment: IPost) {
-    return this.currentUser$.pipe(
-      take(1),
-      map((user) => {
-        return !comment.likes.includes(user?._id || '');
-      })
-    );
+    return !comment.likes.includes(this.currentUser?._id || '');
   }
 
   handleLikeUnlike(postId: string): void {

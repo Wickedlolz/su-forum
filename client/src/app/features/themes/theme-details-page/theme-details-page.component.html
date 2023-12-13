@@ -15,14 +15,14 @@
             Subscribers: <span>{{ theme.subscribers.length }}</span>
           </p>
           <button
-            *ngIf="(isLoggedIn$ | async) && (canSubscribe | async)"
+            *ngIf="(isLoggedIn$ | async) && canSubscribe"
             class="subscribe"
             (click)="handleSubscribeUnsubscribe(theme._id)"
           >
             Subscribe
           </button>
           <button
-            *ngIf="(isLoggedIn$ | async) && !(canSubscribe | async)"
+            *ngIf="(isLoggedIn$ | async) && !canSubscribe"
             class="unsubscribe"
             (click)="handleSubscribeUnsubscribe(theme._id)"
           >
@@ -54,12 +54,12 @@
       </div>
       <div class="footer">
         <i
-          *ngIf="(isLoggedIn$ | async) && (canLike(comment) | async)"
+          *ngIf="(isLoggedIn$ | async) && canLike(comment)"
           (click)="handleLikeUnlike(comment._id)"
           class="fas fa-thumbs-up"
         ></i>
         <i
-          *ngIf="(isLoggedIn$ | async) && !(canLike(comment) | async)"
+          *ngIf="(isLoggedIn$ | async) && !canLike(comment)"
           (click)="handleLikeUnlike(comment._id)"
           class="fas fa-thumbs-down"
         ></i>
@@ -70,7 +70,7 @@
     </div>
     <div class="answer-comment" *ngIf="isLoggedIn$ | async">
       <p>
-        <span>{{ (currentUser$ | async)?.username }}</span> comment:
+        <span>{{ currentUser?.username }}</span> comment:
       </p>
       <div class="answer">
         <form #postForm="ngForm" (ngSubmit)="handleAddPost(postForm)">
