@@ -48,8 +48,6 @@ export class ThemeListComponent implements OnInit, OnDestroy {
   handleUpdateTheme(updatedTheme: ITheme<IPost>) {
     const themeIndex = this.themes.findIndex((t) => t._id === updatedTheme._id);
 
-    if (themeIndex) {
-      this.themes[themeIndex] = updatedTheme as unknown as ITheme;
-    }
+    this.themes[themeIndex] = updatedTheme as unknown as ITheme;
   }
 }
