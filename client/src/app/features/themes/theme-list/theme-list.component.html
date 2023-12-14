@@ -17,4 +17,23 @@
     (newUpdatedThemeEvent)="handleUpdateTheme($event)"
   ></app-theme-item>
   <div *ngIf="themes?.length === 0">No Themes found!</div>
+  <div class="pagination">
+    <button [disabled]="offset === 0" (click)="handlePreviousPage()">
+      &laquo;
+    </button>
+    <a
+      *ngFor="let pageNumber of getPageNumbers()"
+      href="javascript:void(0)"
+      [ngClass]="{ active: pageNumber === currentPage }"
+      (click)="handlePageClick(pageNumber)"
+    >
+      {{ pageNumber }}
+    </a>
+    <button
+      [disabled]="offset > this.themesCount / this.pageSize"
+      (click)="handleNextPage()"
+    >
+      &raquo;
+    </button>
+  </div>
 </div>
