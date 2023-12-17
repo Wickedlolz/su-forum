@@ -18,8 +18,8 @@ This project is created through SoftUni Angular Course @ 2022
 
 -   Search by theme name
 -   Upload user photo (using cloudinary)
--   Pagination (not implement)
+-   Pagination
 -   Unit testing on API and Client (not implement)
 -   User roles (not implement)
     -   Admin wich can delete/edit themes or posts
-    -   regular user wich can create theme and posts also can like posts and subscribe for themes
+    -   Regular user witch can create theme and posts also can like posts and subscribe for themes
