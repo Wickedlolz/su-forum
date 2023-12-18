@@ -46,8 +46,8 @@ export class ThemeService {
     });
   }
 
-  loadThemeById$(themeId: string): Observable<ITheme<IPost>> {
-    return this.httpClient.get<ITheme<IPost>>(
+  loadThemeById$(themeId: string): Observable<ITheme<IPost, string>> {
+    return this.httpClient.get<ITheme<IPost, string>>(
       `${apiUrl}${endpoints.themeById(themeId)}`
     );
   }
@@ -60,7 +60,7 @@ export class ThemeService {
   }
 
   addPost$(themeId: string, postDto: IPostDto) {
-    return this.httpClient.post<ITheme<IPost>>(
+    return this.httpClient.post<ITheme<IPost, string>>(
       `${apiUrl}${endpoints.themeById(themeId)}`,
       postDto
     );

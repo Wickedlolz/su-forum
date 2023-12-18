@@ -3,6 +3,14 @@
     <app-welcome *ngIf="!(isLoggedIn$ | async)"></app-welcome>
     <!-- theme-title  -->
     <div class="theme-title">
+      <div class="actions" *ngIf="theme.userId === currentUser?._id">
+        <button class="actions__edit">
+          <i class="fa-regular fa-pen-to-square"></i> Edit
+        </button>
+        <button class="actions__delete">
+          <i class="fa-regular fa-trash-can"></i> Delete
+        </button>
+      </div>
       <div class="theme-name-wrapper">
         <div class="theme-name">
           <h2>{{ theme.themeName }}</h2>

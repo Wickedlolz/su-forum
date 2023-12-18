@@ -13,6 +13,7 @@ import {
 import { ThemeService } from 'src/app/core/services/theme.service';
 import { ITheme } from 'src/app/core/interfaces/theme';
 import { IPost } from 'src/app/core/interfaces/post';
+import { IUser } from 'src/app/core/interfaces/user';
 
 @Component({
   selector: 'app-theme-list',
@@ -115,7 +116,7 @@ export class ThemeListComponent implements OnInit, OnDestroy {
     });
   }
 
-  handleUpdateTheme(updatedTheme: ITheme<IPost>) {
+  handleUpdateTheme(updatedTheme: ITheme<IPost, string | IUser>) {
     const themeIndex = this.themes.findIndex((t) => t._id === updatedTheme._id);
 
     this.themes[themeIndex] = updatedTheme as unknown as ITheme;

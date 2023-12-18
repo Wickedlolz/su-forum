@@ -15,7 +15,7 @@ import { IUser } from 'src/app/core/interfaces/user';
   styleUrls: ['./theme-details-page.component.css'],
 })
 export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
-  theme!: ITheme<IPost>;
+  theme!: ITheme<IPost, string | IUser>;
   subscription!: Subscription;
   isLoggedIn$ = this.authService.isLoggedIn$;
   isLoading: boolean = true;

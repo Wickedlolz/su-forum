@@ -10,6 +10,7 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 import { ITheme } from 'src/app/core/interfaces/theme';
 import { Observable, map } from 'rxjs';
 import { IPost } from 'src/app/core/interfaces/post';
+import { IUser } from 'src/app/core/interfaces/user';
 
 @Component({
   selector: 'app-theme-item',
@@ -18,7 +19,9 @@ import { IPost } from 'src/app/core/interfaces/post';
 })
 export class ThemeItemComponent implements OnChanges {
   @Input() theme!: ITheme;
-  @Output() newUpdatedThemeEvent = new EventEmitter<ITheme<IPost>>();
+  @Output() newUpdatedThemeEvent = new EventEmitter<
+    ITheme<IPost, string | IUser>
+  >();
   isLoggedIn$ = this.authService.isLoggedIn$;
   isPending: boolean = false;
   canSubscribe$!: Observable<boolean>;
