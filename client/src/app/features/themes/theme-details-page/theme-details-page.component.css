@@ -1,24 +1,3 @@
-.actions {
-  margin-top: 8px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-}
-
-.actions button {
-  border: none;
-  padding: 3px 10px;
-  border-radius: 0.3rem;
-}
-
-.actions .actions__edit {
-  background-color: #f7e653;
-}
-
-.actions .actions__delete {
-  background-color: red;
-}
-
 .theme-content {
   display: flex;
   flex-direction: column;
@@ -99,12 +78,36 @@
   padding: 1em;
 }
 
-.comment header p {
+.comment .header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
   padding: 0.3em;
   text-align: center;
   background-color: #ffffff;
   border-bottom: 1px dashed;
   margin-right: 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.actions button {
+  border: none;
+  padding: 3px 10px;
+  border-radius: 0.3rem;
+}
+
+.actions .actions__edit {
+  background-color: #f7e653;
+}
+
+.actions .actions__delete {
+  background-color: red;
 }
 
 .comment-main {
