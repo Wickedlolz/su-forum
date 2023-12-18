@@ -38,14 +38,13 @@
           <span>{{ comment.userId.username }}</span> posted on
           <time>{{ comment.createdAt | date : "short" }}</time>
         </p>
-        <div class="actions" *ngIf="comment.userId._id === currentUser?._id">
-          <button class="actions__edit">
-            <i class="fa-regular fa-pen-to-square"></i> Edit
-          </button>
-          <button class="actions__delete">
-            <i class="fa-regular fa-trash-can"></i> Delete
-          </button>
-        </div>
+        <button
+          class="delete"
+          (click)="handleDeletePost(comment)"
+          *ngIf="comment.userId._id === currentUser?._id"
+        >
+          <i class="fa-regular fa-trash-can"></i> Delete
+        </button>
       </header>
       <div class="comment-main">
         <div class="userdetails">

@@ -132,4 +132,14 @@ export class ThemeDetailsPageComponent implements OnInit, OnDestroy {
       },
     });
   }
+
+  handleDeletePost(comment: IPost) {
+    if (this.isPending) {
+      return;
+    }
+
+    this.isPending = true;
+
+    // this.postService.deletePost$().subscribe({})
+  }
 }
