@@ -14,7 +14,7 @@ This project is created through SoftUni Angular Course @ 2022
 -   Like/Unlike posts
 -   Subscribe/Unsubscribe for themes
 
-## New Features:
+### New Features:
 
 -   Search by theme name
 -   Delete your post
