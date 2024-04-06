@@ -32,49 +32,51 @@
       </div>
     </div>
     <!-- comment  -->
-    <div class="comment" *ngFor="let comment of theme.posts">
-      <header class="header">
-        <p>
-          <span>{{ comment.userId.username }}</span> posted on
-          <time>{{ comment.createdAt | date : "short" }}</time>
-        </p>
-        <button
-          class="delete"
-          (click)="handleDeletePost(comment)"
-          *ngIf="comment.userId._id === currentUser?._id"
-        >
-          <i class="fa-regular fa-trash-can"></i> Delete
-        </button>
-      </header>
-      <div class="comment-main">
-        <div class="userdetails">
-          <img
-            [src]="comment.userId.photoURL || '/assets/profile.png'"
-            alt="avatar"
-          />
-        </div>
-        <div class="post-content">
+    <section class="comments-container">
+      <article class="comment" *ngFor="let comment of theme.posts">
+        <header class="header">
           <p>
-            {{ comment.text }}
+            <span>{{ comment.userId.username }}</span> posted on
+            <time>{{ comment.createdAt | date : "short" }}</time>
+          </p>
+          <button
+            class="delete"
+            (click)="handleDeletePost(comment)"
+            *ngIf="comment.userId._id === currentUser?._id"
+          >
+            <i class="fa-regular fa-trash-can"></i> Delete
+          </button>
+        </header>
+        <div class="comment-main">
+          <div class="userdetails">
+            <img
+              [src]="comment.userId.photoURL || '/assets/profile.png'"
+              alt="avatar"
+            />
+          </div>
+          <div class="post-content">
+            <p>
+              {{ comment.text }}
+            </p>
+          </div>
+        </div>
+        <div class="footer">
+          <i
+            *ngIf="(isLoggedIn$ | async) && canLike(comment)"
+            (click)="handleLikeUnlike(comment._id)"
+            class="fas fa-thumbs-up"
+          ></i>
+          <i
+            *ngIf="(isLoggedIn$ | async) && !canLike(comment)"
+            (click)="handleLikeUnlike(comment._id)"
+            class="fas fa-thumbs-down"
+          ></i>
+          <p>
+            <span>{{ comment.likes.length }}</span> likes
           </p>
         </div>
-      </div>
-      <div class="footer">
-        <i
-          *ngIf="(isLoggedIn$ | async) && canLike(comment)"
-          (click)="handleLikeUnlike(comment._id)"
-          class="fas fa-thumbs-up"
-        ></i>
-        <i
-          *ngIf="(isLoggedIn$ | async) && !canLike(comment)"
-          (click)="handleLikeUnlike(comment._id)"
-          class="fas fa-thumbs-down"
-        ></i>
-        <p>
-          <span>{{ comment.likes.length }}</span> likes
-        </p>
-      </div>
-    </div>
+      </article>
+    </section>
     <div class="answer-comment" *ngIf="isLoggedIn$ | async">
       <p>
         <span>{{ currentUser?.username }}</span> comment:

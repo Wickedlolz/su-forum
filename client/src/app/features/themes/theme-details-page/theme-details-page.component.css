@@ -1,3 +1,27 @@
+.comments-container {
+  height: 800px;
+  overflow: auto;
+  overflow-y: scroll;
+  padding-inline: 2px;
+}
+
+.comments-container::-webkit-scrollbar {
+  width: 5px; /* Width of the scrollbar */
+}
+
+.comments-container::-webkit-scrollbar-track {
+  background: transparent; /* Make the scrollbar track transparent */
+}
+
+.comments-container::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar thumb */
+  border-radius: 5px; /* Radius of the scrollbar thumb */
+}
+
+.comments-container::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color of the scrollbar thumb on hover */
+}
+
 .theme-content {
   display: flex;
   flex-direction: column;
