@@ -1,5 +1,5 @@
 import { Schema, model, Types } from 'mongoose';
-import { USER_ROLES } from '../utils/userRoles';
+import { USER_ROLES } from '../utils/userRoles.js';
 
 const userSchema = new Schema(
     {
