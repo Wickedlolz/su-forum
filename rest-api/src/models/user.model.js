@@ -1,5 +1,4 @@
 import { Schema, model, Types } from 'mongoose';
-import { USER_ROLES } from '../utils/userRoles.js';
 
 const userSchema = new Schema(
     {
@@ -10,11 +9,6 @@ const userSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-        },
-        role: {
-            type: Number,
-            enum: [USER_ROLES.Admin, USER_ROLES.USER],
-            default: USER_ROLES.USER,
         },
         photoURL: String,
         username: {

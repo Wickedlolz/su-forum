@@ -22,6 +22,3 @@ This project is created through SoftUni Angular Course @ 2022
 -   Upload user photo (using cloudinary)
 -   Pagination
 -   Unit testing on API and Client (not implement)
--   User roles (not implement)
-    -   Admin witch can delete/edit themes or posts and delete accounts
-    -   Regular user witch can create theme and posts also can like posts and subscribe for themes
