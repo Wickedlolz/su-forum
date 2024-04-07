@@ -14,7 +14,7 @@ const userSchema = new Schema(
         role: {
             type: Number,
             enum: [USER_ROLES.Admin, USER_ROLES.USER],
-            default: 2,
+            default: USER_ROLES.USER,
         },
         photoURL: String,
         username: {
