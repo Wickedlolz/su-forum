@@ -16,7 +16,7 @@ This project is created through SoftUni Angular Course @ 2022
 
 ### New Features:
 
--   Rewrite entire REST API
+-   Rewrite entire REST API (NestJS)
 -   Search by theme name
 -   Delete your post
 -   Upload user photo (using cloudinary)
