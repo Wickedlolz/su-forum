@@ -8,7 +8,7 @@ const apiUrl = environment.apiUrl;
 
 const endpoints = {
   posts: (limit?: number) => `/posts${limit ? '?limit=' + limit : ''}`,
-  like: (postId: string) => `/likes/${postId}`,
+  like: (postId: string) => `/posts/like/${postId}`,
 };
 
 @Injectable({
