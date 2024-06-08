@@ -35,9 +35,9 @@ This API isn't open API. Authentication is required to store and get data. You c
 
 # Endpoints: Users
 
--   `/auth/register` -- signing up;
--   `/auth/login` -- signing in;
--   `/auth/logout` -- logging out;
+- `/auth/register` -- signing up;
+- `/auth/login` -- signing in;
+- `/auth/logout` -- logging out;
 
 ## Register User
 
@@ -51,11 +51,9 @@ Signs up user and returns the registered data as json.
 
 ```
 {
-    "name":"John Doe",
     "email":"john@email.com",
     "username":"Johny",
     "password":"12345",
-    "rePassword":"12345"
 }
 ```
 
@@ -69,7 +67,7 @@ Required:
 
 Not Required
 
-`tel` : [string] -- Optional;
+`phone` : [string] -- Optional;
 
 ### Success Response:
 
@@ -178,8 +176,8 @@ Content:
 
 # Endpoints: Themes
 
--   `/themes`
--   `/themes/:themeId`
+- `/themes`
+- `/themes/:themeId`
 
 ## Get Themes
 
@@ -327,7 +325,7 @@ Content:
 
 # Endpoints: Posts
 
--   `/themes/:themeId/posts/:postId`
+- `/themes/:themeId/posts/:postId`
 
 ## Edit Post
 
