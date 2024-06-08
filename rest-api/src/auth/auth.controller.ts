@@ -36,7 +36,7 @@ export class AuthController {
   }
 
   @Post('/logout')
-  async logout(@Req() req: IAuthRequest, @Res() res: Response) {
+  logout(@Req() req: IAuthRequest, @Res() res: Response) {
     res
       .clearCookie(process.env.COOKIE_NAME)
       .status(204)
