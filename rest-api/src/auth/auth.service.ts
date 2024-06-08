@@ -22,7 +22,10 @@ export class AuthService {
     const existing = await this.getUserByEmail(registerDto.email);
 
     if (existing) {
-      throw new HttpException('Email is taken.', 400);
+      throw new HttpException(
+        'This email/username is already registered!',
+        409,
+      );
     }
 
     const hashedPassword = await hash(registerDto.password, 10);
