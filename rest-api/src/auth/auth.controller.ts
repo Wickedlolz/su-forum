@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Post,
+  Req,
   Res,
   UsePipes,
   ValidationPipe,
@@ -10,6 +11,7 @@ import { AuthService } from './auth.service';
 import { Response } from 'express';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
+import { IAuthRequest } from 'src/interfaces/user.interface';
 
 @Controller('auth')
 export class AuthController {
@@ -31,5 +33,13 @@ export class AuthController {
 
     res.cookie(process.env.COOKIE_NAME, token);
     res.status(200).json(user);
+  }
+
+  @Post('/logout')
+  async logout(@Req() req: IAuthRequest, @Res() res: Response) {
+    res
+      .clearCookie(process.env.COOKIE_NAME)
+      .status(204)
+      .json({ message: 'Logged out!' });
   }
 }
